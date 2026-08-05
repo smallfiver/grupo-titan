@@ -4,7 +4,7 @@ document.addEventListener('alpine:init', () => {
         password: '',
         loginError: '',
         currentTab: 'overview', // 'overview', 'orders', 'influencers'
-        loading: true,
+        loading: false,
         
         // Analytics State
         liveUsers: 0,
@@ -229,11 +229,8 @@ document.addEventListener('alpine:init', () => {
             if (!this.supabase) {
                 this.supabase = window.supabase.createClient('https://sclbrgfgxooqgqijuplq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjbGJyZ2ZneG9vcWdxaWp1cGxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxNDQ3MDUsImV4cCI6MjA5OTcyMDcwNX0.wq9KczbVz7Jp2TcD6CeKceSUmy5Rr7wuADk5MqIJvbs');
             }
-            this.checkAuth();
-            if (this.authenticated) {
-                this.fetchData();
-                this.startAnalyticsPolling();
-            }
+            this.fetchData();
+            this.startAnalyticsPolling();
         },
 
         startAnalyticsPolling() {
@@ -261,7 +258,7 @@ document.addEventListener('alpine:init', () => {
             }
         },
 
-        async checkAuth() {
+        async fetchData() {
             if (this.loading) return;
             this.loading = true;
             

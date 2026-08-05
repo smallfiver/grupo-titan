@@ -113,7 +113,6 @@ const PRODUCTS = [
   { id: "b15", name: "TREMBO ENANTATO", price: 130, brand: "BLANK", dos: "200 MG / 10ML", desc: "O Enantato de Testosterona é um dos ésteres mais equilibrados, com meia-vida confortável para aplicações menos frequentes, servindo como pilar central de qualquer ciclo.", img: "BLANK/trenbolon enantat 200mg.png" },
 
 
-  // SEÇÃO: MUSCLEPHARMA
                                 
   // SEÇÃO: AESTHETIC
   { id: "ae1", name: "BOLDENONA", price: 130, brand: "AESTHETIC", dos: "300 MG / 10ML", desc: "A Boldenona é um esteroide anabolizante derivado da testosterona, conhecido por promover ganhos sólidos, duradouros e aumento expressivo na vascularização e apetite. Ideal para fases de bulking limpo e aumento de resistência.", img: "AESTHETIC/BOLDENONA 300MG.png" },
@@ -136,7 +135,6 @@ const BRANDS = [
 
   { brand: "BLANK", hero: "banner 1.png", color: "from-lime-600/20", theme: "blank-glow" },
   { brand: "LANDER GOLD", hero: "banner 1.png", color: "from-yellow-500/20", trend: true, theme: "lander-glow" },
-  { brand: "MUSCLEPHARMA", hero: "banner 1.png", color: "from-blue-500/20", trend: true, theme: "muscle-glow" },
   { brand: "AESTHETIC", hero: "banner 1.png", color: "from-yellow-600/20", hot: true, theme: "aesthetic-glow" },
   { brand: "LANDERLAN", hero: "banner 1.png", color: "from-yellow-700/20", trend: true, theme: "lander-glow" },
   { brand: "VARIADOS", hero: "banner 1.png", color: "from-teal-600/20", hot: true, theme: "blank-glow" }

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle | Grupo Titan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #fff; }
+        .glass-panel { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="dashboard()" x-init="init()" class="h-screen flex overflow-hidden">
+
+    <!-- Auth Screen -->
+    <div x-cloak x-show="!authenticated" class="fixed inset-0 z-50 bg-[#050505] flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md p-10 rounded-[2rem] shadow-2xl text-center border-t border-red-600/30">
+            <h1 class="text-3xl font-black italic uppercase tracking-tighter text-white mb-2">TITAN ADMIN</h1>
+            <p class="text-[10px] font-black text-red-600 uppercase tracking-[0.3em] mb-8">Acesso Restrito</p>
+            
+            <form @submit.prevent="login" class="space-y-4">
+                <input type="password" x-model="password" placeholder="Senha de Acesso" class="w-full bg-white/5 border border-white/10 rounded-xl p-4 font-bold text-center text-white focus:outline-none focus:border-red-600 transition tracking-widest">
+                <button type="submit" class="w-full py-4 bg-red-600 text-white rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-red-700 transition-colors">
+                    Entrar no Painel
+                </button>
+            </form>
+            <p x-show="loginError" class="text-red-500 text-xs font-bold mt-4 uppercase tracking-wider" x-text="loginError"></p>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div x-cloak x-show="authenticated && mobileSidebarOpen" @click="mobileSidebarOpen = false" class="fixed inset-0 bg-black/80 z-40 md:hidden backdrop-blur-sm transition-opacity"></div>
+
+    <!-- Sidebar -->
+    <aside x-cloak x-show="authenticated" class="fixed inset-y-0 left-0 w-64 glass-panel border-r border-white/5 flex flex-col z-50 transition-transform duration-300 md:relative md:translate-x-0 bg-[#050505] shadow-2xl md:shadow-none"
+           :class="mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+        <div class="p-6 border-b border-white/5">
+            <h2 class="text-2xl font-black italic uppercase tracking-tighter text-white">TITAN<span class="text-red-600">DASH</span></h2>
+        </div>
+        
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto no-scrollbar">
+            <button @click="currentTab = 'overview'; mobileSidebarOpen = false" :class="currentTab === 'overview' ? 'bg-red-600/10 text-red-500' : 'text-slate-400 hover:bg-white/5'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Visão Geral
+            </button>
+            <button @click="currentTab = 'orders'; mobileSidebarOpen = false" :class="currentTab === 'orders' ? 'bg-red-600/10 text-red-500' : 'text-slate-400 hover:bg-white/5'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i> Pedidos
+            </button>
+            <button @click="currentTab = 'recovery'; mobileSidebarOpen = false" :class="currentTab === 'recovery' ? 'bg-red-600/10 text-red-500' : 'text-slate-400 hover:bg-white/5'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors relative">
+                <i data-lucide="alert-circle" class="w-4 h-4"></i> Recuperação
+                <span x-show="abandonedCount > 0" class="absolute right-4 bg-red-600 text-white text-[9px] font-black w-5 h-5 flex items-center justify-center rounded-full" x-text="abandonedCount"></span>
+            </button>
+            <button @click="currentTab = 'influencers'; mobileSidebarOpen = false" :class="currentTab === 'influencers' ? 'bg-red-600/10 text-red-500' : 'text-slate-400 hover:bg-white/5'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors">
+                <i data-lucide="users" class="w-4 h-4"></i> Cupons & Atletas
+            </button>
+            <button @click="currentTab = 'reports'; mobileSidebarOpen = false" :class="currentTab === 'reports' ? 'bg-red-600/10 text-red-500' : 'text-slate-400 hover:bg-white/5'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors">
+                <i data-lucide="bar-chart-2" class="w-4 h-4"></i> Relatórios
+            </button>
+        </nav>
+        
+        <div class="p-4 border-t border-white/5">
+            <button @click="logout" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-500 hover:text-red-500 transition-colors">
+                <i data-lucide="log-out" class="w-4 h-4"></i> Sair
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main x-cloak x-show="authenticated" class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        <!-- Header -->
+        <header class="h-20 glass-panel border-b border-white/5 flex items-center justify-between px-4 md:px-8 z-10 shrink-0">
+            <div class="flex items-center gap-3">
+                <button @click="mobileSidebarOpen = true" class="md:hidden w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <h2 class="text-sm md:text-lg font-black uppercase tracking-widest text-white" x-text="
+                    currentTab === 'overview' ? 'Visão Geral' : 
+                    currentTab === 'orders' ? 'Gerenciador de Pedidos' : 
+                    currentTab === 'recovery' ? 'Carrinhos Abandonados' :
+                    currentTab === 'reports' ? 'Relatórios de Vendas' :
+                    'Controle de Parceiros'
+                "></h2>
+            </div>
+            <div class="flex items-center gap-2 md:gap-4">
+                <!-- Date Filter -->
+                <div class="flex items-center gap-2 bg-white/5 p-1 rounded-xl border border-white/5">
+                    <select x-model="dateFilter" class="bg-transparent text-xs font-bold text-white uppercase tracking-widest focus:outline-none px-2 py-1 appearance-none cursor-pointer">
+                        <option value="all" class="bg-[#0a0a0c]">Todo Período</option>
+                        <option value="today" class="bg-[#0a0a0c]">Hoje</option>
+                        <option value="week" class="bg-[#0a0a0c]">Últimos 7 dias</option>
+                        <option value="month" class="bg-[#0a0a0c]">Este Mês</option>
+                        <option value="custom" class="bg-[#0a0a0c]">Personalizado</option>
+                    </select>
+                    
+                    <div x-show="dateFilter === 'custom'" class="flex items-center gap-1 border-l border-white/10 pl-2">
+                        <input type="date" x-model="customStartDate" class="bg-black/50 text-[10px] text-white rounded px-1 py-1 border border-white/10 focus:outline-none">
+                        <span class="text-white/50 text-[10px]">até</span>
+                        <input type="date" x-model="customEndDate" class="bg-black/50 text-[10px] text-white rounded px-1 py-1 border border-white/10 focus:outline-none">
+                    </div>
+                </div>
+
+                <button @click="fetchData" class="w-10 h-10 shrink-0 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-600 transition-colors" :class="loading ? 'animate-spin' : ''">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic View -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 relative z-0 w-full">
+            
+            <!-- OVERVIEW -->
+            <template x-if="currentTab === 'overview'">
+                <div class="space-y-8">
+                    <!-- KPIs -->
+                    <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 md:gap-6">
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl">
+                            <p class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-emerald-500"></i> Faturamento</p>
+                            <h3 class="text-xl md:text-2xl font-black text-white">R$ <span x-text="metrics.revenue.toFixed(2).replace('.', ',')"></span></h3>
+                        </div>
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl">
+                            <p class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-blue-500"></i> Vendas</p>
+                            <h3 class="text-xl md:text-2xl font-black text-white" x-text="metrics.totalOrders"></h3>
+                        </div>
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl">
+                            <p class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><i data-lucide="credit-card" class="w-3.5 h-3.5 text-purple-500"></i> Ticket Médio</p>
+                            <h3 class="text-xl md:text-2xl font-black text-white">R$ <span x-text="metrics.ticketMedio.toFixed(2).replace('.', ',')"></span></h3>
+                        </div>
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl">
+                            <p class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-red-500"></i> Abandonado</p>
+                            <h3 class="text-xl md:text-2xl font-black text-white">R$ <span x-text="abandonedTotalValue.toFixed(2).replace('.', ',')"></span></h3>
+                        </div>
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl">
+                            <p class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2"><i data-lucide="crown" class="w-3.5 h-3.5 text-yellow-500"></i> Top Parceiro</p>
+                            <h3 class="text-xl md:text-2xl font-black text-white truncate" x-text="metrics.topInfluencer || 'Nenhum'"></h3>
+                        </div>
+                        <div class="glass-panel p-4 md:p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors"></div>
+                            <div class="relative flex items-center justify-between mb-2">
+                                <p class="text-[9px] md:text-[10px] font-black text-red-500 uppercase tracking-widest flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping absolute"></span>
+                                    <span class="w-2 h-2 rounded-full bg-red-500 relative"></span>
+                                    Radar Ao Vivo
+                                </p>
+                            </div>
+                            <div class="relative flex items-end gap-2">
+                                <h3 class="text-xl md:text-3xl font-black text-white leading-none" x-text="liveUsers"></h3>
+                                <span class="text-[10px] font-bold text-slate-400 mb-1">online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart and Recent Orders -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Chart -->
+                        <div class="lg:col-span-2 glass-panel p-6 rounded-2xl">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Evolução de Vendas (Últimos 7 dias)</h4>
+                            <div class="h-64 w-full">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Recent Orders Quick View -->
+                        <div class="glass-panel p-6 rounded-2xl">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Últimas Vendas</h4>
+                            <div class="space-y-4">
+                                <template x-for="order in orders.slice(0, 5)" :key="order.id">
+                                    <div class="border-b border-white/5 pb-3">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="text-xs font-bold text-white" x-text="order.customer_name"></span>
+                                            <span class="text-xs font-black text-emerald-400">R$ <span x-text="order.total.toFixed(2)"></span></span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[10px] text-slate-500 font-bold" x-text="formatDate(order.created_at)"></span>
+                                            <span x-show="order.coupon" class="text-[9px] font-black text-red-500 uppercase tracking-widest" x-text="'CUPOM: ' + order.coupon"></span>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Intel Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                        
+                        <!-- Top Products -->
+                        <div class="glass-panel p-6 rounded-2xl">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-yellow-500"></i> Campeões de Venda</h4>
+                            <div class="space-y-3">
+                                <template x-for="(prod, index) in topProductsList" :key="index">
+                                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-xs font-black text-slate-500 w-4" x-text="index + 1 + '.'"></span>
+                                            <div>
+                                                <p class="text-xs font-bold text-white uppercase" x-text="prod.name"></p>
+                                                <p class="text-[9px] font-black text-slate-500 uppercase tracking-wider" x-text="prod.brand + ' • ' + prod.qty + ' un'"></p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-black text-emerald-400">R$ <span x-text="prod.revenue.toFixed(2)"></span></span>
+                                    </div>
+                                </template>
+                                <p x-show="topProductsList.length === 0" class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center py-4">Sem dados no período</p>
+                            </div>
+                        </div>
+
+                        <!-- Heatmap / Top States -->
+                        <div class="glass-panel p-6 rounded-2xl">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-blue-500"></i> Mapa de Vendas (Estados)</h4>
+                            <div class="space-y-3">
+                                <template x-for="(st, index) in topStatesList" :key="index">
+                                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                                                <span class="text-xs font-black text-white" x-text="st.state"></span>
+                                            </div>
+                                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest"><span x-text="st.count"></span> Pedidos</p>
+                                        </div>
+                                        <span class="text-xs font-black text-emerald-400">R$ <span x-text="st.revenue.toFixed(2)"></span></span>
+                                    </div>
+                                </template>
+                                <p x-show="topStatesList.length === 0" class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center py-4">Sem dados no período</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </template>
+
+            <!-- ORDERS LIST -->
+            <template x-if="currentTab === 'orders'">
+                <div class="glass-panel rounded-2xl w-full overflow-hidden">
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full text-left text-sm whitespace-nowrap min-w-[800px]">
+                            <thead>
+                            <tr class="bg-white/5 text-[9px] font-black uppercase tracking-widest text-slate-400 border-b border-white/5">
+                                <th class="px-6 py-4">Data</th>
+                                <th class="px-6 py-4">Cliente / Contato</th>
+                                <th class="px-6 py-4">Total</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Cód. Rastreio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="order in activeOrders" :key="order.id">
+                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                                    <td class="px-6 py-4 text-[10px] text-slate-400 font-bold whitespace-nowrap" x-text="formatDateTime(order.created_at)"></td>
+                                    <td class="px-6 py-4 whitespace-normal min-w-[300px]">
+                                        <p class="text-xs font-bold text-white mb-0.5" x-text="order.customer_name"></p>
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <a :href="'https://wa.me/55' + order.customer_phone.replace(/\D/g, '')" target="_blank" class="text-[10px] text-emerald-500 font-bold hover:underline flex items-center gap-1">
+                                                <i data-lucide="phone" class="w-3 h-3"></i> <span x-text="order.customer_phone"></span>
+                                            </a>
+                                            <span x-show="order.utm_source" class="text-[8px] bg-indigo-600/20 text-indigo-400 px-1.5 py-0.5 rounded font-black uppercase tracking-widest" x-text="order.utm_source + (order.utm_medium ? ' / ' + order.utm_medium : '')"></span>
+                                        </div>
+                                        
+                                        <!-- Endereço Completo -->
+                                        <div x-show="order.address" class="mb-3 p-2 bg-white/5 rounded-lg border border-white/10 text-[9px] text-slate-300">
+                                            <div class="font-bold text-white mb-1"><i data-lucide="map-pin" class="w-3 h-3 inline pb-0.5"></i> Endereço de Entrega:</div>
+                                            <div x-text="`${order.address.street || ''}, ${order.address.number || ''}`"></div>
+                                            <div x-text="`${order.address.neighborhood || ''} - ${order.address.city || ''}/${order.address.state || ''}`"></div>
+                                            <div x-text="`CEP: ${order.address.zip || ''}`"></div>
+                                            <div x-show="order.address.reference" class="mt-1 text-yellow-500/80 italic" x-text="`Ref: ${order.address.reference}`"></div>
+                                        </div>
+                                        
+                                        <!-- Produtos do Pedido Agrupados por Marca -->
+                                        <div class="space-y-3 bg-black/20 p-3 rounded-xl border border-white/5">
+                                            <template x-for="(items, brand) in groupByBrand(order.items)" :key="brand">
+                                                <div>
+                                                    <div class="text-[9px] font-black text-red-500 uppercase tracking-widest mb-1" x-text="brand"></div>
+                                                    <ul class="space-y-1">
+                                                        <template x-for="item in items" :key="item.id">
+                                                            <li class="flex justify-between items-start text-[10px]">
+                                                                <span class="text-white font-medium break-words max-w-[200px]" x-text="item.qty + 'x ' + item.name + (item.dos ? ' - ' + item.dos : '')"></span>
+                                                                <span class="text-slate-500 shrink-0" x-text="'R$ ' + item.price"></span>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs font-black text-emerald-400">R$ <span x-text="order.total.toFixed(2)"></span></td>
+                                    <td class="px-6 py-4">
+                                        <select x-model="order.status" @change="updateOrderStatus(order.id, order.status)" class="bg-[#0a0a0c] border border-white/10 text-[10px] font-bold uppercase tracking-widest rounded-lg px-2 py-1.5 focus:outline-none focus:border-red-600 cursor-pointer" :class="{
+                                            'text-yellow-500': order.status === 'pending',
+                                            'text-emerald-500': order.status === 'approved' || order.status === 'delivered',
+                                            'text-blue-500': order.status === 'shipped',
+                                            'text-red-500': order.status === 'canceled' || order.status === 'rejected'
+                                        }">
+                                            <option value="pending" class="text-white">WhatsApp Iniciado</option>
+                                            <option value="approved" class="text-white">Aprovado</option>
+                                            <option value="rejected" class="text-white">Não Aprovado</option>
+                                            <option value="shipped" class="text-white">Enviado</option>
+                                            <option value="delivered" class="text-white">Entregue</option>
+                                            <option value="canceled" class="text-white">Cancelado</option>
+                                        </select>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" x-model="order.tracking_code" placeholder="BR123456789BR" class="bg-[#0a0a0c] border border-white/10 rounded-lg px-3 py-1.5 text-[10px] font-bold text-white uppercase tracking-widest w-32 focus:outline-none focus:border-red-600">
+                                            <button @click="saveTrackingCode(order.id, order.tracking_code)" class="w-7 h-7 rounded-lg bg-red-600 hover:bg-red-700 flex items-center justify-center transition-colors" title="Salvar Rastreador">
+                                                <i data-lucide="save" class="w-3 h-3 text-white"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ABANDONED CARTS (RECOVERY) -->
+            <template x-if="currentTab === 'recovery'">
+                <div class="glass-panel rounded-2xl w-full overflow-hidden">
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full text-left text-sm whitespace-nowrap min-w-[800px]">
+                            <thead>
+                            <tr class="bg-white/5 text-[9px] font-black uppercase tracking-widest text-slate-400 border-b border-white/5">
+                                <th class="px-6 py-4">Data do Abandono</th>
+                                <th class="px-6 py-4">Cliente / Contato</th>
+                                <th class="px-6 py-4">Valor em Risco</th>
+                                <th class="px-6 py-4 text-center">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="order in abandonedCarts" :key="order.id">
+                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                                    <td class="px-6 py-4 text-[10px] text-slate-400 font-bold whitespace-nowrap" x-text="formatDateTime(order.created_at)"></td>
+                                    <td class="px-6 py-4 whitespace-normal min-w-[300px]">
+                                        <p class="text-xs font-bold text-white mb-0.5" x-text="order.customer_name"></p>
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="text-[10px] text-emerald-500 font-bold flex items-center gap-1">
+                                                <i data-lucide="phone" class="w-3 h-3"></i> <span x-text="order.customer_phone"></span>
+                                            </span>
+                                        </div>
+                                        
+                                        <!-- Produtos Abandonados Agrupados por Marca -->
+                                        <div class="space-y-3 bg-black/20 p-3 rounded-xl border border-white/5">
+                                            <template x-for="(items, brand) in groupByBrand(order.items)" :key="brand">
+                                                <div>
+                                                    <div class="text-[9px] font-black text-red-500 uppercase tracking-widest mb-1" x-text="brand"></div>
+                                                    <ul class="space-y-1">
+                                                        <template x-for="item in items" :key="item.id">
+                                                            <li class="flex justify-between items-start text-[10px]">
+                                                                <span class="text-white font-medium break-words max-w-[200px]" x-text="item.qty + 'x ' + item.name + (item.dos ? ' - ' + item.dos : '')"></span>
+                                                                <span class="text-slate-500 shrink-0" x-text="'R$ ' + item.price"></span>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs font-black text-red-500">R$ <span x-text="order.total.toFixed(2)"></span></td>
+                                    <td class="px-6 py-4 text-center">
+                                        <button @click="recoverCart(order)" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors">
+                                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Recuperar Venda
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr x-show="abandonedCarts.length === 0">
+                                <td colspan="4" class="px-6 py-12 text-center text-slate-500 font-bold text-xs uppercase tracking-widest">
+                                    <i data-lucide="check-circle" class="w-8 h-8 mx-auto mb-3 opacity-50"></i>
+                                    Nenhum carrinho abandonado!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </template>
+
+            <!-- INFLUENCERS / COUPONS -->
+            <template x-if="currentTab === 'influencers'">
+                <div class="space-y-6 md:space-y-8 w-full">
+                    <!-- Create Coupon Form -->
+                    <div class="glass-panel p-4 md:p-6 rounded-2xl w-full space-y-4">
+                        <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-red-500 mb-2">Criar Novo Cupom / Promoção</h3>
+                        
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Código do Cupom</label>
+                                <input type="text" x-model="newCoupon.code" placeholder="EX: TITAN10" class="w-full bg-[#0a0a0c] border border-white/10 rounded-xl p-3 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                            </div>
+                            <div class="w-full md:w-48">
+                                <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Tipo</label>
+                                <select x-model="newCoupon.type" class="w-full bg-[#0a0a0c] border border-white/10 rounded-xl p-3 font-bold text-xs text-white focus:outline-none focus:border-red-600 transition cursor-pointer">
+                                    <option value="percent">% Desconto</option>
+                                    <option value="bundle">Combo (X por R$)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="w-full md:w-40" x-show="newCoupon.type === 'percent'">
+                                <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">% Desconto</label>
+                                <input type="number" x-model="newCoupon.discount" placeholder="10" class="w-full bg-[#0a0a0c] border border-white/10 rounded-xl p-3 font-bold text-xs text-white text-center focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                            </div>
+                            <div class="flex gap-4 w-full" x-show="newCoupon.type === 'bundle'">
+                                <div class="flex-1">
+                                    <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Qtd. Produtos</label>
+                                    <input type="number" x-model="newCoupon.bundleQty" placeholder="5" class="w-full bg-[#0a0a0c] border border-white/10 rounded-xl p-3 font-bold text-xs text-white text-center focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Preço Total R$</label>
+                                    <input type="number" x-model="newCoupon.bundlePrice" placeholder="400" class="w-full bg-[#0a0a0c] border border-white/10 rounded-xl p-3 font-bold text-xs text-white text-center focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Marcas Válidas <span class="text-slate-600">(vazio = todas)</span></label>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="brand in ['TITAN','THUNDER','PHENIX','BLANK','MUSCLEPHARMA','AESTHETIC','LANDERLAN','LANDER GOLD']">
+                                    <button @click="toggleBrand(brand)" 
+                                            :class="newCoupon.brands.includes(brand) ? 'bg-red-600 text-white border-red-600' : 'bg-white/5 text-slate-400 border-white/10 hover:border-white/30'"
+                                            class="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider border transition-all" 
+                                            x-text="brand"></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <button @click="createCoupon()" class="w-full md:w-auto px-8 py-3 bg-red-600 text-white rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-red-700 transition-colors">
+                            Criar Cupom
+                        </button>
+                    </div>
+
+                    <!-- Saved Coupons Table -->
+                    <template x-if="savedCoupons.length > 0">
+                        <div class="glass-panel rounded-2xl overflow-hidden">
+                            <div class="p-4 border-b border-white/5">
+                                <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Cupons Cadastrados</h3>
+                            </div>
+                            <div class="overflow-x-auto w-full">
+                                <table class="w-full text-left text-sm whitespace-nowrap min-w-[700px]">
+                                    <thead>
+                                        <tr class="bg-white/5 text-[9px] font-black uppercase tracking-widest text-slate-400 border-b border-white/5">
+                                            <th class="px-5 py-3">Código</th>
+                                            <th class="px-5 py-3">Tipo</th>
+                                            <th class="px-5 py-3">Valor</th>
+                                            <th class="px-5 py-3">Marcas</th>
+                                            <th class="px-5 py-3 text-center">Usos</th>
+                                            <th class="px-5 py-3 text-right">Receita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template x-for="c in savedCoupons" :key="c.code">
+                                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                                <td class="px-5 py-3 text-xs font-black text-white uppercase tracking-widest" x-text="c.code"></td>
+                                                <td class="px-5 py-3">
+                                                    <span :class="c.type === 'bundle' ? 'bg-purple-600/20 text-purple-400' : 'bg-emerald-600/20 text-emerald-400'" class="text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded" x-text="c.type === 'bundle' ? 'COMBO' : 'DESCONTO'"></span>
+                                                </td>
+                                                <td class="px-5 py-3 text-xs font-bold text-white">
+                                                    <span x-text="c.type === 'bundle' ? c.bundle_qty + ' por R$' + c.bundle_price : c.discount_percent + '%'"></span>
+                                                </td>
+                                                <td class="px-5 py-3">
+                                                    <div class="flex flex-wrap gap-1">
+                                                        <span x-show="!c.brands || c.brands.length === 0" class="text-[9px] font-bold text-slate-500">Todas</span>
+                                                        <template x-for="b in (c.brands || [])">
+                                                            <span class="text-[8px] font-black bg-white/10 text-white px-1.5 py-0.5 rounded uppercase" x-text="b"></span>
+                                                        </template>
+                                                    </div>
+                                                </td>
+                                                <td class="px-5 py-3 text-center text-xs font-black text-white" x-text="couponMetrics[c.code] ? couponMetrics[c.code].count : 0"></td>
+                                                <td class="px-5 py-3 text-right text-xs font-black text-emerald-400">R$ <span x-text="couponMetrics[c.code] ? couponMetrics[c.code].revenue.toFixed(2) : '0.00'"></span></td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Coupon Performance Cards -->
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 px-2">Performance por Cupom</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <template x-for="(data, coupon) in influencers" :key="coupon">
+                        <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-bl-full -z-10 group-hover:bg-red-600/20 transition-colors"></div>
+                            <div class="flex items-start justify-between mb-6">
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Cód. Cupom</p>
+                                    <h3 class="text-lg font-black text-white uppercase tracking-widest" x-text="coupon"></h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                                    <i data-lucide="award" class="w-5 h-5 text-yellow-500"></i>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center pb-4 border-b border-white/5">
+                                    <span class="text-xs font-bold text-slate-400">Vendas Realizadas</span>
+                                    <span class="text-sm font-black text-white" x-text="data.count"></span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-slate-400">Total Gerado</span>
+                                    <span class="text-sm font-black text-emerald-400">R$ <span x-text="data.revenue.toFixed(2)"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="Object.keys(influencers).length === 0">
+                        <div class="col-span-full py-20 text-center">
+                            <i data-lucide="users" class="w-12 h-12 text-slate-600 mx-auto mb-4"></i>
+                            <p class="text-xs font-black uppercase tracking-widest text-slate-500">Nenhum cupom foi utilizado ainda.</p>
+                        </div>
+                    </template>
+                </div>
+                </div>
+            </template>
+
+            <!-- REPORTS -->
+            <template x-if="currentTab === 'reports'">
+                <div class="space-y-8 w-full">
+                    <template x-for="(metrics, brand) in productSalesMetrics" :key="brand">
+                        <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                            <div class="bg-white/5 p-4 flex items-center justify-between border-b border-white/5">
+                                <h3 class="text-sm font-black text-red-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="box" class="w-4 h-4"></i>
+                                    <span x-text="brand"></span>
+                                </h3>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Total da Marca</div>
+                                    <div class="text-lg font-black text-white">R$ <span x-text="metrics.totalRevenue.toFixed(2)"></span> <span class="text-xs text-slate-500 font-normal" x-text="`(${metrics.totalItems} un.)`"></span></div>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm whitespace-nowrap min-w-[600px]">
+                                    <thead>
+                                        <tr class="bg-black/20 text-[9px] font-black uppercase tracking-widest text-slate-500 border-b border-white/5">
+                                            <th class="px-6 py-3">Produto</th>
+                                            <th class="px-6 py-3 text-center">Qtd. Vendida</th>
+                                            <th class="px-6 py-3 text-right">Valor Total (R$)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template x-for="prod in Object.values(metrics.products).sort((a,b) => b.qty - a.qty)" :key="prod.name">
+                                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                                <td class="px-6 py-3 text-xs font-bold text-white" x-text="prod.name"></td>
+                                                <td class="px-6 py-3 text-center text-xs font-black text-slate-300">
+                                                    <span class="bg-white/10 px-2 py-1 rounded" x-text="prod.qty + ' un.'"></span>
+                                                </td>
+                                                <td class="px-6 py-3 text-right text-xs font-black text-emerald-400">R$ <span x-text="prod.revenue.toFixed(2)"></span></td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <div x-show="Object.keys(productSalesMetrics).length === 0" class="text-center py-20 bg-white/5 rounded-2xl border border-white/5">
+                        <i data-lucide="package-open" class="w-12 h-12 text-slate-500 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-sm">Nenhuma venda registrada ainda</p>
+                    </div>
+                </div>
+            </template>
+            
+            <!-- INFLUENCERS / UTM -->
+            <div x-show="currentTab === 'influencers'" class="space-y-6 animate-fade-in w-full">
+                <!-- Header Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-panel p-6 border border-white/5 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="flex items-center gap-4 relative z-10">
+                            <div class="w-12 h-12 rounded-xl bg-red-600/10 flex items-center justify-center">
+                                <i data-lucide="mouse-pointer-click" class="w-6 h-6 text-red-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total de Cliques Rastreados</p>
+                                <p class="text-2xl font-black text-white" x-text="influencerMetrics.totalClicks"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel p-6 border border-white/5 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="flex items-center gap-4 relative z-10">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600/10 flex items-center justify-center">
+                                <i data-lucide="check-circle" class="w-6 h-6 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Vendas por Influencers</p>
+                                <p class="text-2xl font-black text-white" x-text="influencerMetrics.totalSales"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Influencer Table -->
+                <div class="glass-panel border border-white/5 rounded-2xl overflow-hidden mt-6">
+                    <div class="p-6 border-b border-white/5 flex items-center justify-between bg-black/20">
+                        <h3 class="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="award" class="w-4 h-4 text-red-600"></i> Performance de Parceiros
+                        </h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm whitespace-nowrap min-w-[600px]">
+                            <thead>
+                                <tr class="bg-black/20 text-[9px] font-black uppercase tracking-widest text-slate-500 border-b border-white/5">
+                                    <th class="px-6 py-4">Cupom / UTM</th>
+                                    <th class="px-6 py-4 text-center">Cliques / Acessos</th>
+                                    <th class="px-6 py-4 text-center">Pedidos Gerados</th>
+                                    <th class="px-6 py-4 text-right">Taxa de Conversão</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="inf in influencerMetrics.list" :key="inf.utm">
+                                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                                                    <i data-lucide="user" class="w-4 h-4 text-slate-400"></i>
+                                                </div>
+                                                <span class="text-xs font-black text-white uppercase tracking-widest" x-text="inf.utm"></span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="bg-white/10 px-3 py-1 rounded text-xs font-bold text-slate-300" x-text="inf.clicks"></span>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded text-xs font-bold" x-text="inf.sales"></span>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <span class="text-xs font-black text-slate-400" x-text="(inf.clicks > 0 ? ((inf.sales / inf.clicks) * 100).toFixed(1) : 0) + '%'"></span>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr x-show="influencerMetrics.list.length === 0">
+                                    <td colspan="4" class="px-6 py-10 text-center">
+                                        <i data-lucide="users" class="w-10 h-10 text-slate-500 mx-auto mb-3 opacity-50"></i>
+                                        <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Nenhum dado de parceiro encontrado</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>

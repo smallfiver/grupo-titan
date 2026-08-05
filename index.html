@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#DC2626">
+    <meta name="description" content="A maior loja de alta performance. Compre produtos originais da Landerlan, Thunder, Titan e mais. Entrega garantida, frete expresso e suporte via WhatsApp.">
+    <title>Grupo Titan | Loja de Suplementos e Laboratórios Underground</title>
+    
+    <!-- Open Graph Tags (SEO & Social Share) -->
+    <meta property="og:title" content="Grupo Titan | Laboratórios Underground & Alta Performance">
+    <meta property="og:description" content="A maior loja de alta performance. Compre produtos originais da Landerlan, Thunder, Titan e mais.">
+    <meta property="og:image" content="https://www.grupotitan.sbs/BANNER%20GRUPO%20TITAN.webp">
+    <meta property="og:url" content="https://www.grupotitan.sbs">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preload" as="image" href="BANNER GRUPO TITAN.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="BANNER GRUPO TITAN MOBILE.webp" media="(max-width: 1024px)">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="products.js?v=20260805"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #DC2626;
+            --primary-dark: #991B1B;
+            --background: #F8FAFC;
+            --text: #0F172A;
+            --card: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme='dark'] {
+            --background: #09090B;
+            --text: #F8FAFC;
+            --card: rgba(15, 23, 42, 0.6);
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.5s ease;
+        }
+
+        .premium-gradient {
+            background: linear-gradient(135deg, #09090B 0%, #111827 50%, #DC2626 100%);
+        }
+
+        .app-glass {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+
+        .glass-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.1);
+        }
+
+        .tap-bounce:active {
+            transform: scale(0.95);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px #dc2626); }
+            14% { transform: scale(1.15); filter: drop-shadow(0 0 15px #dc2626); }
+            28% { transform: scale(1); filter: drop-shadow(0 0 2px #dc2626); }
+            42% { transform: scale(1.15); filter: drop-shadow(0 0 15px #dc2626); }
+            70% { transform: scale(1); filter: drop-shadow(0 0 2px #dc2626); }
+        }
+        .heartbeat-badge { animation: heartbeat 2s infinite ease-in-out; }
+        .badge-hot { background: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        .badge-trend { background: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+
+        /* Mascot Aura Themes */
+        .titan-glow:hover { box-shadow: 0 0 35px rgba(220, 38, 38, 0.4); border-color: #dc2626; }
+        .thunder-glow:hover { box-shadow: 0 0 35px rgba(234, 179, 8, 0.4); border-color: #eab308; }
+        .venom-glow:hover { box-shadow: 0 0 35px rgba(34, 197, 94, 0.4); border-color: #22c55e; }
+        .phenix-glow:hover { box-shadow: 0 0 35px rgba(249, 115, 22, 0.4); border-color: #f97316; }
+        .lander-glow:hover { box-shadow: 0 0 35px rgba(234, 179, 8, 0.4); border-color: #eab308; }
+        .muscle-glow:hover { box-shadow: 0 0 35px rgba(59, 130, 246, 0.4); border-color: #3b82f6; }
+        .kraft-glow:hover { box-shadow: 0 0 35px rgba(59, 130, 246, 0.4); border-color: #3b82f6; }
+        .blank-glow:hover { box-shadow: 0 0 35px rgba(132, 204, 22, 0.4); border-color: #84cc16; }
+        .aesthetic-glow:hover { box-shadow: 0 0 45px rgba(197, 160, 89, 0.5); border-color: #C5A059; }
+
+        .sidebar-item {
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #64748B;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .category-pill {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .category-pill.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Testimonial Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-ticker {
+            display: flex;
+            width: max-content;
+            animation: ticker 40s linear infinite;
+        }
+        .animate-ticker:hover { animation-play-state: paused; }
+
+        /* --- Elite Product Card System --- */
+        .product-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 40px 80px -15px rgba(220, 38, 38, 0.15);
+        }
+
+        /* Hard Contrast for Branding Forte */
+        .product-name-title {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        .product-price-text {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+
+        [data-theme='dark'] .product-name-title,
+        [data-theme='dark'] .product-price-text {
+            color: #ffffff !important;
+        }
+
+        .product-image-pedestal {
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [data-theme='dark'] .product-image-pedestal {
+            background: #f8fafc;
+        }
+
+        .product-image {
+            mix-blend-mode: multiply;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .badge-elite {
+            background: var(--brand-color, #dc2626);
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-brand-main {
+            background: var(--brand-color, #dc2626) !important;
+            box-shadow: 0 15px 30px -10px var(--brand-color, #dc2626) !important;
+        }
+
+        .btn-brand-cart {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .aesthetic-glow { background: #0a0a0a !important; border-color: rgba(197, 160, 89, 0.2); }
+        .aesthetic-glow .btn-brand-main { background: #C5A059 !important; color: #000000 !important; border: 1px solid #C5A059; }
+        .aesthetic-glow .btn-brand-cart { background: #111111 !important; color: #C5A059 !important; border: 1px solid #C5A059; }
+        .aesthetic-glow .badge-elite { background: #000000 !important; color: #C5A059 !important; border: 1px solid #C5A059; }
+        
+        .aesthetic-glow .product-image-pedestal { background: #000000 !important; }
+        .aesthetic-glow .product-image { mix-blend-mode: normal !important; filter: brightness(1.1); }
+        .aesthetic-glow .product-name-title { color: #ffffff !important; }
+        .aesthetic-glow .product-price-text { color: #ffffff !important; }
+        .aesthetic-glow .text-slate-500 { color: #94a3b8 !important; }
+        
+        .product-card:hover .btn-brand-cart {
+            border-color: var(--brand-color, #dc2626);
+            color: var(--brand-color, #dc2626);
+        }
+
+        /* Mascot Aura Themes & Colors */
+        .titan-glow { --brand-color: #dc2626; }
+        .thunder-glow { --brand-color: #eab308; }
+        .venom-glow { --brand-color: #22c55e; }
+        .phenix-glow { --brand-color: #f97316; }
+        .lander-glow { --brand-color: #ca8a04; }
+        .muscle-glow { --brand-color: #3b82f6; }
+        .kraft-glow { --brand-color: #2563eb; }
+        .blank-glow { --brand-color: #84cc16; }
+        .aesthetic-glow { --brand-color: #C5A059; }
+
+        .titan-glow:hover { box-shadow: 0 0 35px rgba(220, 38, 38, 0.4); border-color: #dc2626; }
+        .thunder-glow:hover { box-shadow: 0 0 35px rgba(234, 179, 8, 0.4); border-color: #eab308; }
+        .venom-glow:hover { box-shadow: 0 0 35px rgba(34, 197, 94, 0.4); border-color: #22c55e; }
+        .phenix-glow:hover { box-shadow: 0 0 35px rgba(249, 115, 22, 0.4); border-color: #f97316; }
+        .lander-glow:hover { box-shadow: 0 0 35px rgba(234, 179, 8, 0.4); border-color: #ca8a04; }
+        .muscle-glow:hover { box-shadow: 0 0 35px rgba(59, 130, 246, 0.4); border-color: #3b82f6; }
+        .kraft-glow:hover { box-shadow: 0 0 35px rgba(59, 130, 246, 0.4); border-color: #2563eb; }
+        .blank-glow:hover { box-shadow: 0 0 35px rgba(132, 204, 22, 0.4); border-color: #84cc16; }
+
+        .product-aura {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            filter: blur(40px);
+        }
+        .product-card:hover .product-aura {
+            opacity: 0.15;
+        }
+
+        [x-cloak] { display: none !important; }
+
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .app-glass { backdrop-filter: blur(10px); }
+            .product-card { border-radius: 1.5rem !important; }
+            .product-image-pedestal { padding: 0.75rem !important; height: 140px !important; }
+            h1 { font-size: 2.2rem !important; line-height: 1 !important; }
+            h2 { font-size: 1.6rem !important; }
+            .modal-content { border-radius: 2rem !important; }
+            .p-10, .p-12, .p-16 { padding: 1rem !important; }
+            .gap-12 { gap: 1rem !important; }
+            .gap-10 { gap: 0.75rem !important; }
+            .fixed.bottom-6 { bottom: 0.75rem !important; left: 0.75rem !important; right: 0.75rem !important; }
+            .btn-brand-main { padding: 0.85rem !important; border-radius: 0.85rem !important; font-size: 9px !important; }
+            .product-name-title { 
+                font-size: 1rem !important; 
+                line-height: 1 !important; 
+                margin-bottom: 0.15rem !important;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                min-height: 2em;
+            }
+            .product-price-text { font-size: 1.5rem !important; }
+            .btn-brand-cart { width: 2.8rem !important; height: 2.8rem !important; border-radius: 0.7rem !important; }
+            .btn-brand-cart i { width: 1.25rem !important; height: 1.25rem !important; }
+            .product-image-pedestal img { transform: scale(0.8); }
+            .stars-container i { width: 0.75rem !important; height: 0.75rem !important; }
+        }
+    </style>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body x-data="titanStore()" x-init="init()" class="bg-[#F8FAFC] dark:bg-[#050505] text-slate-900 dark:text-white antialiased transition-colors duration-300">
+
+    <!-- Welcome Image Popup -->
+    <div x-cloak x-show="showWelcome" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" @click="showWelcome = false">
+        <div class="relative w-[85vw] max-w-sm md:max-w-md animate-fade-in-up" @click.stop>
+            <button @click="showWelcome = false" class="absolute -top-12 right-0 md:-right-4 w-10 h-10 bg-white/10 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md border border-white/20">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <img src="./POUP.png" alt="Aviso Titan" class="w-full max-h-[75vh] md:max-h-[85vh] h-auto rounded-2xl shadow-2xl border border-white/10 object-contain">
+        </div>
+    </div>
+
+    <!-- Top Banner (Dark) -->
+    <div class="w-full bg-black text-white text-[11px] font-bold py-1.5 px-4 flex justify-between items-center sm:justify-center border-b border-white/5">
+        <div class="w-full max-w-7xl mx-auto flex justify-between items-center px-4">
+            <span class="hidden sm:inline-block font-black tracking-widest text-red-600">GRUPO TITAN | Bio-Intelligence Labs</span>
+            <div class="flex items-center gap-2 mx-auto sm:mx-0">
+                <span>Compre <strong>ACIMA DE R$ 2.000,00</strong> e ganhe <strong>FRETE GRÁTIS</strong></span>
+            </div>
+            <div class="hidden sm:flex items-center gap-2">
+                <span>Brasil</span>
+                <i data-lucide="chevron-down" class="w-3 h-3"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header (Black/Red) -->
+    <header class="w-full bg-[#09090b] text-white sticky top-0 z-50 border-b border-red-600/20" x-data="{ megaMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex flex-wrap md:flex-nowrap items-center justify-between gap-x-6 gap-y-2">
+            <!-- Logo -->
+            <div class="flex flex-col cursor-pointer group" @click="filter = ''; window.scrollTo({top: 0, behavior: 'smooth'})">
+                <h1 class="text-2xl sm:text-3xl font-black italic tracking-tighter uppercase leading-none drop-shadow-md flex items-center gap-2">
+                    Grupo<span class="text-red-600 text-3xl sm:text-4xl group-hover:scale-105 transition-transform">Titan</span>
+                </h1>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="w-full md:w-auto md:flex-1 max-w-2xl mt-2 md:mt-0 order-3 md:order-2">
+                <div class="relative w-full">
+                    <input type="text" x-model="search" @input="window.scrollTo({top: 800, behavior: 'smooth'})" placeholder="Busque produtos ou marcas..." class="w-full py-3 px-4 pr-12 rounded bg-white/5 border border-white/10 text-white placeholder-slate-400 font-bold text-xs md:text-sm outline-none focus:border-red-600 transition">
+                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-red-600">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center gap-4 md:gap-6 order-2 md:order-3">
+                <div class="hidden lg:flex items-center gap-2 cursor-pointer group hover:text-red-600 transition">
+                    <i data-lucide="user" class="w-6 h-6"></i>
+                    <div class="leading-tight text-xs font-bold">
+                        <p>Cadastre-se ou</p>
+                        <p>faça seu login</p>
+                    </div>
+                </div>
+                
+                <div class="hidden xl:flex items-center gap-2 cursor-pointer group hover:text-red-600 transition">
+                    <i data-lucide="heart" class="w-6 h-6"></i>
+                    <span class="text-xs font-bold">Favoritos</span>
+                </div>
+
+                <div class="hidden xl:flex items-center gap-2 cursor-pointer group hover:text-red-600 transition">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                    <div class="leading-tight text-xs font-bold">
+                        <p>Atendimento</p>
+                        <p>VIP</p>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <div @click="openCart = true" class="relative flex items-center gap-2 cursor-pointer group">
+                    <div class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition shadow-lg shadow-red-600/20">
+                        <i data-lucide="shopping-cart" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    </div>
+                    <template x-if="cart.length >= 0">
+                        <span class="absolute -top-1 -right-1 bg-white text-black text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border border-red-600" x-text="cart.length"></span>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar (Dark) - Hidden on mobile -->
+        <nav class="hidden lg:block w-full bg-[#050505] text-white relative border-t border-white/5 shadow-2xl">
+            <div class="max-w-7xl mx-auto flex items-center justify-between text-[11px] font-black uppercase tracking-wide overflow-x-auto no-scrollbar">
+                
+                <!-- Mega Menu Trigger -->
+                <div class="relative" @mouseenter="megaMenu = true" @mouseleave="megaMenu = false">
+                    <div class="flex items-center gap-2 px-6 py-4 cursor-pointer hover:text-red-600 hover:bg-white/5 transition border-r border-white/5">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                        <span>TODAS AS MARCAS</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400"></i>
+                    </div>
+
+                    <!-- Mega Menu Content -->
+                    <div x-show="megaMenu" x-cloak class="absolute top-full left-0 w-[100vw] lg:w-[1000px] bg-[#09090b] border border-white/10 shadow-2xl p-6 z-[6000] cursor-default flex flex-col gap-6 -ml-4 lg:ml-0 overflow-y-auto max-h-[80vh]">
+                        <!-- Brands Grid -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 text-sm normal-case">
+                            <template x-for="brand in BRANDS" :key="brand.brand">
+                                <div class="flex flex-col gap-3 group">
+                                    <h3 class="text-red-600 font-black uppercase mb-1 flex items-center gap-2 cursor-pointer hover:text-white transition" @click="filter = brand.brand">
+                                        <i data-lucide="shield" class="w-4 h-4"></i>
+                                        <span x-text="brand.brand"></span>
+                                    </h3>
+                                    <!-- List top 3 products for this brand as quick links -->
+                                    <template x-for="prod in PRODUCTS.filter(p => p.brand === brand.brand).slice(0, 3)">
+                                        <a href="#" class="text-gray-400 hover:text-white transition text-[11px] uppercase font-bold" @click.prevent="filter = brand.brand; window.scrollTo({top: 800, behavior: 'smooth'})" x-text="prod.name"></a>
+                                    </template>
+                                    <a href="#" class="text-red-600 hover:text-white transition text-[10px] uppercase font-black mt-2" @click.prevent="filter = brand.brand; window.scrollTo({top: 800, behavior: 'smooth'})">Ver catálogo &rarr;</a>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Nav Links (Brands directly) -->
+                <div class="flex items-center gap-6 px-4 whitespace-nowrap">
+                    <template x-for="brand in BRANDS.filter(b => !b.hot && !b.trend).slice(0, 8)" :key="brand.brand">
+                        <a href="#" @click.prevent="filter = brand.brand; window.scrollTo({top: 800, behavior: 'smooth'})" class="hover:text-red-600 transition" x-text="brand.brand"></a>
+                    </template>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Edge-to-Edge Hero Banner -->
+    <div class="w-full relative bg-[#09090b] overflow-hidden group aspect-[4/5] sm:aspect-auto sm:h-[400px] md:h-[500px] lg:h-[600px]">
+        <template x-for="(banner, index) in heroBanners" :key="index">
+            <div class="absolute inset-0 w-full h-full bg-black flex items-center justify-center"
+                 x-show="activeBanner === index"
+                 x-transition:enter="transition ease-out duration-1000"
+                 x-transition:enter-start="opacity-0 translate-x-full"
+                 x-transition:enter-end="opacity-100 translate-x-0"
+                 x-transition:leave="transition ease-in duration-1000"
+                 x-transition:leave-start="opacity-100 translate-x-0"
+                 x-transition:leave-end="opacity-0 -translate-x-full">
+                
+                <picture class="w-full h-full block">
+                    <source :srcset="banner.mobile" media="(max-width: 1024px)">
+                    <img :src="banner.desktop" fetchpriority="high" class="w-full h-full object-cover sm:object-cover">
+                </picture>
+            </div>
+        </template>
+        
+        <!-- Arrows -->
+        <button @click="prevBanner()" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-black hover:bg-white transition opacity-0 group-hover:opacity-100 shadow-xl z-20">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button @click="nextBanner()" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-black hover:bg-white transition opacity-0 group-hover:opacity-100 shadow-xl z-20">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Dots -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+            <template x-for="(banner, index) in heroBanners" :key="index">
+                <button @click="activeBanner = index; resetBannerTimer()" 
+                        class="w-2.5 h-2.5 rounded-full transition-all"
+                        :class="activeBanner === index ? 'bg-red-600 w-8' : 'bg-white/50 hover:bg-white'"></button>
+            </template>
+        </div>
+    </div>
+
+    <!-- Features Bar -->
+    <div class="w-full bg-[#050505] border-y border-white/5 py-4 px-4 mb-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar gap-6 snap-x snap-mandatory sm:grid sm:grid-cols-3 lg:grid-cols-5">
+            <div class="flex items-center gap-3 shrink-0 snap-center min-w-[200px] sm:min-w-0">
+                <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 shrink-0">
+                    <i data-lucide="truck" class="w-6 h-6"></i>
+                </div>
+                <div class="text-[11px] font-bold text-white leading-tight">
+                    <p>Frete grátis a partir de R$ 2.000,00*</p>
+                    <a href="#" class="underline text-slate-400 font-normal">Consulte condições</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 shrink-0 snap-center min-w-[200px] sm:min-w-0">
+                <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 shrink-0">
+                    <i data-lucide="barcode" class="w-6 h-6"></i>
+                </div>
+                <div class="text-[11px] font-bold text-white leading-tight">
+                    <p>Parcele em até 6x sem juros no cartão</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0 snap-center min-w-[200px] sm:min-w-0">
+                <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 shrink-0">
+                    <i data-lucide="coins" class="w-6 h-6"></i>
+                </div>
+                <div class="text-[11px] font-bold text-white leading-tight">
+                    <p>CASHBACK TITAN</p>
+                    <a href="#" class="underline text-slate-400 font-normal">Consulte condições</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0 snap-center min-w-[200px] sm:min-w-0">
+                <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 shrink-0">
+                    <i data-lucide="message-square" class="w-6 h-6"></i>
+                </div>
+                <div class="text-[11px] font-bold text-white leading-tight">
+                    <p>Atendimento Especializado</p>
+                    <a href="#" class="underline text-slate-400 font-normal">Fale com especialista</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0 snap-center min-w-[200px] sm:min-w-0">
+                <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 shrink-0">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div class="text-[11px] font-bold text-white leading-tight">
+                    <p>Procedência 100% Garantida</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-32">
+
+
+        <!-- Catalog Control Bar - hidden on mobile since header has search -->
+        <div class="hidden sm:flex flex-col sm:flex-row items-center justify-between gap-6 mb-12">
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:max-w-4xl">
+                <div class="relative flex-1 group">
+                    <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-red-600 transition-colors"></i>
+                    <input 
+                        id="search-input"
+                        type="text"
+                        placeholder="Pesquisar protocolo..."
+                        x-model="search"
+                        class="w-full bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl py-4 pl-14 pr-6 focus:outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/5 transition-all text-sm font-bold shadow-sm text-slate-900 dark:text-white"
+                    >
+                </div>
+
+                <div class="relative group">
+                    <i data-lucide="sliders-horizontal" class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                    <select 
+                        x-model="sortBy"
+                        class="w-full sm:w-[220px] bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl py-4 pl-14 pr-10 focus:outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/5 transition-all text-sm font-black shadow-sm appearance-none cursor-pointer text-slate-900 dark:text-white"
+                    >
+                        <option value="default" class="dark:bg-slate-900">Ordenar por</option>
+                        <option value="price-asc" class="dark:bg-slate-900">Menor Preço</option>
+                        <option value="price-desc" class="dark:bg-slate-900">Maior Preço</option>
+                        <option value="name-asc" class="dark:bg-slate-900">Nome (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="hidden sm:flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-slate-400 bg-white dark:bg-white/5 px-6 py-4 rounded-2xl border border-slate-50 dark:border-white/5 shadow-sm">
+                <span x-text="filteredProducts.length + ' Protocolos'"></span>
+            </div>
+        </div>
+
+        <!-- ATHLETES AUTHORITY CAROUSEL (OCULTO POR ENQUANTO) -->
+        <div class="w-full mb-12 hidden">
+            <div class="flex items-center gap-3 mb-5 px-2">
+                <i data-lucide="award" class="w-5 h-5 text-red-600"></i>
+                <h2 class="text-sm md:text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">Atletas Oficiais Titan</h2>
+                <div class="flex-1 h-px bg-slate-200 dark:bg-white/10"></div>
+                <span class="text-[9px] font-black text-red-600 uppercase tracking-widest animate-pulse">Arraste →</span>
+            </div>
+            
+            <div x-data="{ activeSlide: 0 }" class="relative">
+                <div x-ref="athleteScroller" @scroll.debounce.100ms="activeSlide = Math.round($el.scrollLeft / ($el.scrollWidth / athletes.length))" class="flex gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth px-4 -mx-4" style="-webkit-overflow-scrolling: touch;">
+                    <template x-for="(athleteImg, idx) in athletes" :key="idx">
+                        <div class="w-[82vw] sm:w-[55vw] md:w-[38vw] lg:w-[28vw] shrink-0 snap-center group">
+                            <div class="rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 group-active:scale-[0.97]" 
+                                 :class="activeSlide === idx ? 'ring-2 ring-red-600 ring-offset-2 ring-offset-white dark:ring-offset-black shadow-red-600/30' : 'ring-0'">
+                                <img :src="athleteImg" alt="Atleta Titan" class="w-full h-auto max-h-[70vh] object-contain mx-auto bg-black transition-transform duration-700 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Dot Indicators -->
+                <div class="flex items-center justify-center gap-2 mt-5">
+                    <template x-for="(_, idx) in athletes" :key="'dot'+idx">
+                        <button @click="$refs.athleteScroller.scrollTo({ left: idx * ($refs.athleteScroller.scrollWidth / athletes.length), behavior: 'smooth' })" 
+                                class="rounded-full transition-all duration-300"
+                                :class="activeSlide === idx ? 'w-6 h-2 bg-red-600' : 'w-2 h-2 bg-slate-300 dark:bg-white/20 hover:bg-red-400'"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Sidebar / Category Scroller -->
+            <aside class="w-full lg:w-72 shrink-0">
+                <!-- Mobile Carousel (Biohack Style) -->
+                <div class="flex lg:hidden overflow-x-auto no-scrollbar gap-3 pb-8 -mx-4 px-4">
+
+                    <template x-for="brand in BRANDS">
+                        <button
+                            @click="filter = brand.brand"
+                            :class="filter === brand.brand ? 'category-pill active' : 'category-pill'"
+                            class="flex-shrink-0 px-6 py-3 rounded-2xl text-[11px] font-black uppercase tracking-wider transition-all tap-bounce flex items-center gap-2"
+                        >
+                            <span x-text="brand.brand"></span>
+                            <template x-if="brand.hot">
+                                <div class="flex items-center gap-1 badge-hot rounded-md px-2 py-0.5 heartbeat-badge">
+                                    <span class="text-[8px] font-black text-white italic">MAIS VENDIDO</span>
+                                </div>
+                            </template>
+                            <template x-if="brand.trend">
+                                <div class="flex items-center gap-1 badge-trend rounded-md px-2 py-0.5 heartbeat-badge">
+                                    <span class="text-[8px] font-black text-white italic">EM ALTA</span>
+                                </div>
+                            </template>
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Desktop Sidebar -->
+                <div class="hidden lg:block lg:sticky lg:top-24">
+                    <div class="flex items-center gap-2 mb-6 px-2">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-red-600"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Departamentos</span>
+                    </div>
+                    
+                    <nav class="space-y-2">
+
+
+                        <template x-for="brand in BRANDS">
+                            <button
+                                @click="filter = brand.brand"
+                                :class="filter === brand.brand ? 'bg-red-600 text-white shadow-lg shadow-red-600/20' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white'"
+                                class="w-full flex items-center justify-between px-5 py-4 rounded-2xl transition-all group tap-bounce"
+                            >
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-bold" x-text="brand.brand"></span>
+                                    <template x-if="brand.hot">
+                                        <div class="flex items-center badge-hot rounded-lg px-2 py-1 heartbeat-badge">
+                                            <span class="text-[7px] font-black text-white uppercase tracking-tighter">Mais Vendido</span>
+                                        </div>
+                                    </template>
+                                    <template x-if="brand.trend">
+                                        <div class="flex items-center badge-trend rounded-lg px-2 py-1 heartbeat-badge">
+                                            <span class="text-[7px] font-black text-white uppercase tracking-tighter">Em Alta</span>
+                                        </div>
+                                    </template>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 transition-transform" :class="filter === brand.brand ? 'translate-x-1' : 'opacity-0 group-hover:opacity-100'"></i>
+                            </button>
+                        </template>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="flex-1">
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+                    <template x-for="product in filteredProducts">
+                        <div @click="selectedProduct = product; showProductModal = true"
+                             class="bg-white/5 rounded-2xl shadow-xl overflow-hidden group cursor-pointer flex flex-col border border-white/5 hover:border-red-600/30 transition-all duration-300">
+                            
+                            <!-- Image Section -->
+                            <div class="relative w-full aspect-square bg-black/40 flex items-center justify-center overflow-hidden">
+                                <div class="absolute top-2 left-2 z-10 bg-red-600 text-white text-[9px] sm:text-[10px] font-black px-2 py-1 rounded shadow-lg animate-pulse uppercase tracking-wider" x-show="product.id.charCodeAt(0) % 2 === 0">
+                                    Poucas Unidades 🔥
+                                </div>
+                                <img :src="product.img" 
+                                     loading="lazy"
+                                     decoding="async"
+                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                     :alt="`Comprar ${product.name} original da marca ${product.brand} - Melhor Preço`">
+                            </div>
+
+                            <!-- LANÇAMENTO Ribbon -->
+                            <div class="w-full bg-red-600/90 text-white text-center py-1 font-black text-[10px] uppercase tracking-[0.2em]">
+                                OFERTA TITAN
+                            </div>
+
+                            <!-- Info Section -->
+                            <div class="p-3 sm:p-5 flex flex-col flex-1 bg-white">
+                                <!-- Brand / Title -->
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-red-600 text-[10px] font-black tracking-widest uppercase" x-text="product.brand"></span>
+                                </div>
+                                <h3 class="text-slate-900 text-[13px] sm:text-[15px] font-bold leading-tight mb-0.5" x-text="product.name"></h3>
+                                <p class="text-[10px] sm:text-[11px] font-black text-slate-500 mb-2 h-4" x-text="product.dos"></p>
+                                
+                                <!-- Stars -->
+                                <div class="flex items-center gap-1 mb-3 sm:mb-4">
+                                    <div class="flex items-center">
+                                        <template x-for="i in 5">
+                                            <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
+                                        </template>
+                                    </div>
+                                    <span class="text-slate-500 text-[11px] font-bold">(<span x-text="Math.floor(Math.random() * 200) + 50"></span> avaliações)</span>
+                                </div>
+                                
+                                <div class="mt-auto">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="text-slate-500 font-bold text-[10px] sm:text-[11px]">A partir de:</span>
+                                    </div>
+                                    <div class="flex items-baseline gap-2 mb-2">
+                                        <span class="text-slate-900 font-black text-xl sm:text-2xl tracking-tighter">R$<span x-text="product.price"></span>,00</span>
+                                    </div>
+                                    <p class="text-slate-500 text-[9px] sm:text-[10px] mb-3 sm:mb-4 font-bold">
+                                        ou em até <strong>6x</strong> sem juros no cartão
+                                    </p>
+                                    
+                                    <!-- Buy Buttons -->
+                                    <div class="flex flex-col gap-2" x-data="{ adding: false }">
+                                        <button @click.stop="selectedProduct = product; showProductModal = true" class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-[11px] sm:text-[13px] py-2.5 sm:py-3 rounded-xl transition-colors uppercase tracking-widest shadow-lg shadow-red-600/20 tap-bounce flex items-center justify-center gap-2">
+                                            COMPRAR AGORA
+                                        </button>
+                                        <button @click.stop="adding = true; addToCart(product); setTimeout(() => adding = false, 2000)" 
+                                                :class="adding ? 'bg-emerald-500 text-white' : 'bg-[#388e3c] text-white hover:bg-[#2e7d32]'"
+                                                class="w-full font-black text-[9px] sm:text-[10px] py-2 rounded-xl transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 tap-bounce border border-transparent">
+                                            <i data-lucide="shopping-cart" class="w-3.5 h-3.5" x-show="!adding"></i>
+                                            <i data-lucide="check-circle" class="w-3.5 h-3.5" x-show="adding"></i>
+                                            <span x-text="adding ? 'Adicionado no Carrinho!' : 'Adicionar ao Carrinho'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <!-- Guia Titan (SEO Blog Section) -->
+        <section class="mt-20 py-16 bg-black relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 md:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4"><span class="text-red-600">Guia</span> Titan</h2>
+                    <p class="text-slate-400 font-bold uppercase tracking-widest text-xs md:text-sm">Artigos para maximizar seus ganhos e conhecimento.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <template x-for="post in blogPosts" :key="post.id">
+                        <article @click="selectedPost = post; showBlogModal = true" class="bg-[#0a0a0c] border border-white/5 hover:border-red-600/30 rounded-2xl p-6 cursor-pointer transition-all hover:bg-white/5 group">
+                            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest mb-3" x-text="post.category"></div>
+                            <h3 class="text-lg font-bold text-white leading-tight mb-4 group-hover:text-red-500 transition-colors" x-text="post.title"></h3>
+                            <p class="text-sm text-slate-400 line-clamp-3 leading-relaxed" x-text="post.excerpt"></p>
+                            <div class="mt-6 flex items-center text-[10px] font-black text-white uppercase tracking-widest gap-2">
+                                Ler Artigo <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Footer -->
+        <footer class="mt-20 py-8 border-t border-white/5 bg-[#050505]">
+            <div class="max-w-7xl mx-auto px-4 md:px-8">
+                <div class="text-[9px] text-slate-600/50 leading-relaxed text-justify">
+                    <strong>Termos Relacionados:</strong> loja de suplementos online, comprar whey protein, creatina monohidratada, hipertrofia muscular, esteroides anabolizantes, comprar testosterona, durateston, deca durabolin, trembolona, oxandrolona, stanozolol, primobolan, masteron, hemogenin, dianabol, proviron, anastrozol, tamoxifeno, tpc, terapia pós ciclo, hormônios, laboratórios underground, titan, thunder, phenix, esteroides originais, comprar aes, ciclo de esteroides, ganho de massa magra, definição muscular, emagrecimento, queima de gordura, clembuterol, t3, hormônio do crescimento, gh, somatropina, peptídeos, sarms, ostarine, cardarine, rad140, ligandrol, musculação, fisiculturismo, bodybuilding, fitness, saúde, performance esportiva, aumento de força, recuperação muscular, pré-treino, bcaa, glutamina, multivitamínico, ômega 3, loja maromba, suplementação esportiva, comprar anabolizantes seguro, entrega garantida, fornecedor de confiança.
+                    <br><br>
+                    Aviso: O conteúdo deste site é meramente informativo. Recomendamos o acompanhamento médico para o uso de qualquer substância. Venda proibida para menores de 18 anos.
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Cart Drawer -->
+        <!-- Cart Sidebar -->
+        <div x-cloak x-show="openCart" class="fixed inset-0 sm:inset-y-0 sm:left-auto right-0 w-full sm:w-[480px] bg-[#050505] z-[7000] flex flex-col shadow-2xl sm:border-l sm:border-white/5 overflow-hidden"
+             style="height: 100dvh;"
+             x-transition:enter="transition ease-out duration-400" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" 
+             x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
+            
+            <!-- Header -->
+            <div class="p-5 sm:p-6 border-b border-white/5 bg-[#0a0a0c] relative z-20 shrink-0">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                            <i data-lucide="shopping-bag" class="w-5 h-5 text-red-600"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-black uppercase tracking-widest text-white">Carrinho</h2>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-0.5">
+                                <span x-text="cart.length"></span> <span x-text="cart.length === 1 ? 'Item' : 'Itens'"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <button @click="openCart = false; step = 1" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-600 text-white transition-all tap-bounce border border-white/5">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Minimal Step Indicator -->
+                <div class="flex items-center gap-2">
+                    <div class="h-1 flex-1 rounded-full overflow-hidden" :class="step >= 1 ? 'bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.5)]' : 'bg-white/10'"></div>
+                    <div class="h-1 flex-1 rounded-full overflow-hidden transition-all duration-500" :class="step >= 2 ? 'bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.5)]' : 'bg-white/10'"></div>
+                </div>
+                <div class="flex justify-between mt-2 px-1">
+                    <span class="text-[8px] font-black uppercase tracking-[0.2em]" :class="step >= 1 ? 'text-white' : 'text-slate-500'">Sacola</span>
+                    <span class="text-[8px] font-black uppercase tracking-[0.2em] transition-colors duration-500" :class="step >= 2 ? 'text-white' : 'text-slate-500'">Identificação</span>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto p-5 sm:p-6 no-scrollbar relative z-10 bg-[#050505]">
+                <template x-if="step === 1">
+                    <div class="space-y-5">
+                        <template x-if="cart.length === 0">
+                            <div class="py-20 flex flex-col items-center text-center">
+                                <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                                    <i data-lucide="shopping-cart" class="w-8 h-8 text-slate-600"></i>
+                                </div>
+                                <p class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Sua sacola está vazia.</p>
+                            </div>
+                        </template>
+
+                        <div class="space-y-4">
+                            <template x-for="(item, index) in cart" :key="index">
+                                <div class="flex items-center gap-4 p-4 bg-[#0a0a0c] rounded-2xl border border-white/5 shadow-lg group">
+                                    <div class="w-20 h-20 rounded-xl bg-black overflow-hidden shrink-0 relative">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                        <img :src="item.img" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-[8px] font-black text-red-600 uppercase tracking-[0.2em] mb-1">
+                                            <span x-text="item.brand"></span> <span x-show="item.dos" x-text="'- ' + item.dos" class="text-slate-400"></span>
+                                        </p>
+                                        <h4 class="text-xs font-black uppercase text-white truncate leading-snug" x-text="item.name"></h4>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <p class="text-sm font-black text-white">R$ <span x-text="item.price"></span></p>
+                                            <button @click="removeFromCart(index)" class="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white flex items-center justify-center transition-colors tap-bounce">
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Coupon Field -->
+                        <template x-if="cart.length > 0">
+                            <div class="mt-8">
+                                <div class="relative flex items-center group">
+                                    <i data-lucide="ticket" class="absolute left-5 w-4 h-4 text-slate-500 group-focus-within:text-red-600 transition-colors"></i>
+                                    <input type="text" x-model="couponCode" placeholder="CUPOM DE ATLETA" class="w-full bg-[#0a0a0c] border border-white/10 rounded-[1.2rem] py-4 pl-12 pr-28 font-black text-[11px] text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600 placeholder:tracking-widest" :disabled="couponApplied">
+                                    <button @click="couponApplied ? (couponApplied = false, discountAmount = 0, couponCode = '') : applyCoupon()" 
+                                            class="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-xl font-black text-[9px] uppercase tracking-[0.2em] transition-all flex items-center justify-center tap-bounce"
+                                            :class="couponApplied ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-red-600 text-white hover:bg-red-700'"
+                                            :disabled="couponLoading">
+                                        <span x-show="!couponLoading" x-text="couponApplied ? 'Remover' : 'Aplicar'"></span>
+                                        <span x-show="couponLoading">Aguarde...</span>
+                                    </button>
+                                </div>
+                                <p x-show="couponApplied" x-transition class="text-emerald-500 font-bold text-[10px] mt-3 flex items-center gap-1.5 px-2 uppercase tracking-wide">
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Benefício ativado!
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <template x-if="step === 2">
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-[9px] font-black uppercase tracking-[0.2em] text-red-600 mb-4 flex items-center gap-2">
+                                <i data-lucide="user" class="w-3.5 h-3.5"></i> Identificação
+                            </p>
+                            <div class="space-y-3">
+                                <input type="text" x-model="form.name" placeholder="NOME COMPLETO" class="w-full bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" x-model="form.id" placeholder="CPF" class="bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                    <input type="text" x-model="form.phone" placeholder="WHATSAPP" class="bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-[9px] font-black uppercase tracking-[0.2em] text-red-600 mb-4 flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Destino
+                            </p>
+                            <div class="space-y-3">
+                                <div class="grid grid-cols-3 gap-3">
+                                    <input type="text" x-model="form.zip" @input="form.zip = form.zip.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0, 9)" placeholder="CEP" class="col-span-2 bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                    <input type="text" x-model="form.state" placeholder="UF" class="bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase text-center focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                </div>
+                                <input type="text" x-model="form.city" placeholder="CIDADE" class="w-full bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                <input type="text" x-model="form.street" placeholder="RUA / AVENIDA" class="w-full bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" x-model="form.number" placeholder="NÚMERO" class="bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                    <input type="text" x-model="form.neighborhood" placeholder="BAIRRO" class="bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                                </div>
+                                <input type="text" x-model="form.reference" placeholder="COMPLEMENTO / REF" class="w-full bg-[#0a0a0c] border border-white/10 rounded-2xl p-4.5 font-bold text-xs text-white uppercase focus:outline-none focus:border-red-600 transition placeholder:text-slate-600">
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Minimal Trust Badges -->
+                <template x-if="cart.length > 0">
+                    <div class="flex items-center justify-between gap-1 mt-10 pt-8 border-t border-white/5 opacity-60">
+                        <div class="flex flex-col items-center gap-1.5 text-center">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-white"></i>
+                            <span class="text-[7px] font-black uppercase tracking-widest text-white">Site Seguro</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 text-center">
+                            <i data-lucide="truck" class="w-4 h-4 text-white"></i>
+                            <span class="text-[7px] font-black uppercase tracking-widest text-white">Caixa Neutra</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1.5 text-center">
+                            <i data-lucide="lock" class="w-4 h-4 text-white"></i>
+                            <span class="text-[7px] font-black uppercase tracking-widest text-white">100% Sigilo</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Premium Flex Footer (Not Absolute to fix mobile bugs) -->
+            <div class="shrink-0 p-5 bg-[#0a0a0c] border-t border-white/5 z-[210] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+                <div class="mb-4">
+                    <div class="flex justify-between items-end mb-3">
+                        <div class="space-y-1.5 w-[50%] text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                            <div class="flex justify-between items-center">
+                                <span>Subtotal</span>
+                                <span class="text-white">R$ <span x-text="subtotal"></span></span>
+                            </div>
+                            <div x-show="couponApplied" class="flex justify-between items-center text-emerald-400">
+                                <span>Cupom (-<span x-text="discountAmount"></span>%)</span>
+                                <span>-R$<span x-text="totalDiscountValue.toFixed(2).replace('.', ',')"></span></span>
+                            </div>
+                            <div class="flex justify-between items-center" :class="selectedShipping.price === 0 ? 'text-emerald-400' : ''">
+                                <span>Frete</span>
+                                <span x-text="selectedShipping.price === 0 ? (cart.length > 0 ? selectedShipping.desc : 'Grátis') : 'R$ ' + selectedShipping.price"></span>
+                            </div>
+                        </div>
+
+                        <div class="text-right flex-1 pl-2">
+                            <p class="text-[8px] font-black text-red-500 uppercase tracking-[0.2em] mb-0.5">Total da Operação</p>
+                            <p class="text-2xl font-black text-white leading-none">R$ <span x-text="total.toFixed(2).replace('.', ',')"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <template x-if="step === 2">
+                            <button @click="step = 1" class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 text-white transition-all shrink-0 active:scale-90 tap-bounce border border-white/10">
+                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                            </button>
+                        </template>
+                        
+                        <button type="button" @click="nextStep()" :disabled="cart.length === 0" 
+                                :class="step === 2 ? 'bg-[#25D366] hover:bg-[#1ebe5a] shadow-[0_0_20px_rgba(37,211,102,0.2)] text-white' : 'bg-red-600 hover:bg-red-700 shadow-[0_0_20px_rgba(220,38,38,0.2)] text-white'"
+                                class="flex-1 h-14 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 group">
+                            <span x-text="step === 1 ? 'PROSSEGUIR' : 'FINALIZAR NO WHATSAPP'"></span>
+                            <i :data-lucide="step === 2 ? 'send' : 'arrow-right'" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Auth Modal (Login / Register) -->
+    <div x-cloak x-show="showAuth" class="fixed inset-0 z-[7000] flex items-center justify-center p-0 sm:p-4 overflow-hidden">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" @click="showAuth = false"></div>
+        
+        <div x-show="showAuth" 
+             x-transition:enter="transition ease-out duration-500" 
+             x-transition:enter-start="opacity-0 scale-95 translate-y-10" 
+             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+             class="relative w-full h-full sm:h-auto sm:max-w-md bg-[#050505] sm:border sm:border-white/10 sm:rounded-[3rem] overflow-y-auto sm:overflow-hidden shadow-[0_0_100px_rgba(220,38,38,0.15)]">
+            
+            <div class="p-8 sm:p-14">
+                <div class="text-center mb-8 sm:mb-12">
+                    <img src="LOGO ONDE FICA TITAN LABS.webp" loading="lazy" decoding="async" class="h-12 sm:h-16 mx-auto mb-6 sm:mb-8 object-contain">
+                    <h2 class="text-2xl sm:text-3xl font-black italic uppercase tracking-tighter text-white" x-text="authMode === 'login' ? 'Acesso Restrito' : 'Novo Protocolo'"></h2>
+                    <p class="text-[9px] font-black text-red-600 uppercase tracking-[0.3em] mt-2" x-text="authMode === 'login' ? 'Insira suas credenciais Titan' : 'Crie sua identidade de elite'"></p>
+                </div>
+
+                <form @submit.prevent="handleAuth()" class="space-y-6">
+                    <div class="space-y-4">
+                        <div class="relative group">
+                            <input type="email" required placeholder="E-mail" class="w-full bg-white/5 border border-white/10 rounded-2xl p-6 font-bold text-sm text-white focus:outline-none focus:border-red-600 transition shadow-inner placeholder:text-white/20">
+                            <i data-lucide="mail" class="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-red-600 transition-colors"></i>
+                        </div>
+                        <div class="relative group">
+                            <input type="password" required placeholder="Senha" class="w-full bg-white/5 border border-white/10 rounded-2xl p-6 font-bold text-sm text-white focus:outline-none focus:border-red-600 transition shadow-inner placeholder:text-white/20">
+                            <i data-lucide="lock" class="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-red-600 transition-colors"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-6 bg-red-600 text-white rounded-2xl font-black text-xs uppercase tracking-[0.4em] transition-all shadow-[0_15px_40px_rgba(220,38,38,0.3)] hover:scale-[1.02] active:scale-95">
+                        <span x-text="authMode === 'login' ? 'AUTENTICAR' : 'REGISTRAR'"></span>
+                    </button>
+                </form>
+
+                <div class="mt-12 text-center space-y-4">
+                    <button @click="authMode = authMode === 'login' ? 'register' : 'login'" class="text-[10px] font-black text-white/40 uppercase tracking-widest hover:text-red-600 transition-colors">
+                        <span x-text="authMode === 'login' ? 'Não tem conta? Crie agora' : 'Já possui acesso? Faça login'"></span>
+                    </button>
+                    <div class="flex justify-center gap-4 text-[7px] font-black text-white/5 uppercase tracking-[0.5em]">
+                        <span>TITAN SECURE</span>
+                        <span>ENC: AES-256</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button @click="showAuth = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/20 hover:text-white hover:bg-red-600 transition-all">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        function titanStore() {
+            return {
+                heroBanners: [
+                    { desktop: 'banner titan principal.png', mobile: 'mobile_banner/banner_2.png' },
+                    { desktop: 'banner 1.png', mobile: 'mobile_banner/banner_1.png' }
+                ],
+                activeBanner: 0,
+                bannerTimer: null,
+                athletes: [
+                    'carrosel atletas/6473831a-e96c-47d4-80c2-efa26c08f175.png',
+                    'carrosel atletas/biapersonall_DavA0uKCXJ7.jpg',
+                    'carrosel atletas/titanperformancebrasil_Da3nr8RJfrC.jpg',
+                    'carrosel atletas/titanperformancebrasil_DaSvP94xQfJ.jpg',
+                    'carrosel atletas/titanperformancebrasil_Dannf1XuTCc.jpg'
+                ],
+                nextBanner() {
+                    this.activeBanner = (this.activeBanner + 1) % this.heroBanners.length;
+                    this.resetBannerTimer();
+                },
+                prevBanner() {
+                    this.activeBanner = (this.activeBanner - 1 + this.heroBanners.length) % this.heroBanners.length;
+                    this.resetBannerTimer();
+                },
+                startBannerRotation() {
+                    this.bannerTimer = setInterval(() => {
+                        this.activeBanner = (this.activeBanner + 1) % this.heroBanners.length;
+                    }, 60000); // 1 minute
+                },
+                resetBannerTimer() {
+                    clearInterval(this.bannerTimer);
+                    this.startBannerRotation();
+                },
+                
+                BRANDS: [],
+                products: [],
+                search: '',
+                filter: 'TITAN',
+                sortBy: 'default',
+                showWelcome: true,
+                showAuth: false,
+                authMode: 'login', // login or register
+                darkMode: true,
+                openCart: false,
+                showProductModal: false,
+                showBlogModal: false,
+                selectedPost: null,
+                blogPosts: [
+                    {
+                        id: 1,
+                        category: 'Ciclos & Saúde',
+                        title: 'O que é TPC e por que ela salva seus ganhos?',
+                        excerpt: 'A Terapia Pós Ciclo (TPC) é fundamental para restaurar o eixo hormonal e segurar a massa muscular ganha. Entenda os melhores protocolos com Tamoxifeno e Clomifeno.',
+                        content: '<p>A <strong>Terapia Pós Ciclo (TPC)</strong> é um dos pilares mais importantes para quem utiliza esteroides anabolizantes. Seu principal objetivo é restaurar a produção natural de testosterona pelo corpo (o eixo HPTA) que é suprimido durante o uso de hormônios exógenos.</p><br><p>Muitos iniciantes focam apenas na fase de <em>bulking</em> ou <em>cutting</em> e negligenciam a TPC. O resultado? Perda de quase toda a massa muscular conquistada, queda drástica de libido, e possíveis episódios de depressão devido à baixa hormonal.</p><br><h3>Os Protetores Mais Comuns</h3><p>Os SERMs (Moduladores Seletivos do Receptor de Estrogênio) são a base da maioria das TPCs. O <strong>Tamoxifeno</strong> e o <strong>Clomifeno</strong> são os mais famosos. Eles bloqueiam a ação do estrogênio no hipotálamo, o que estimula a hipófise a produzir LH e FSH, fazendo com que os testículos voltem a produzir testosterona.</p><br><p>Além dos SERMs, é comum o uso do <strong>HCG</strong> (Gonadotrofina Coriônica Humana) no final de ciclos pesados para "acordar" os testículos antes mesmo dos SERMs entrarem em ação. Lembre-se: O timing é tudo! A TPC deve iniciar quando as drogas do ciclo saem da meia-vida ativa no corpo.</p>'
+                    },
+                    {
+                        id: 2,
+                        category: 'Ésteres',
+                        title: 'Diferença entre Enantato, Cipionato e Propionato',
+                        excerpt: 'Testosterona é testosterona, mas o éster muda tudo. Saiba como escolher entre drogas de meia-vida curta ou longa para o seu objetivo.',
+                        content: '<p>Uma dúvida clássica entre os praticantes de musculação é: qual a diferença entre os tipos de testosterona? A resposta está no <strong>Éster</strong>, uma cadeia de carbono ligada à molécula de testosterona que define o seu tempo de absorção no corpo (meia-vida).</p><br><h3>1. Propionato de Testosterona</h3><p>É um éster curto. Sua meia-vida é de aproximadamente 2 a 3 dias. Isso significa que ele entra no organismo rapidamente e sai rapidamente. É o favorito para fases de <strong>cutting (definição)</strong> porque retém menos líquido e permite um controle mais rápido de possíveis colaterais como aromatização. A desvantagem? Exige aplicações muito frequentes (DSDN - Dia sim, dia não).</p><br><h3>2. Enantato de Testosterona</h3><p>O Enantato é um éster de meia-vida média-longa (aproximadamente 5 a 7 dias). É altamente versátil, sendo a escolha número um para <strong>ciclos de bulking</strong> ou como base para quem faz "Cruise". O conforto das aplicações semanais ou bi-semanais o torna muito atrativo.</p><br><h3>3. Cipionato de Testosterona</h3><p>Muito similar ao Enantato (meia-vida em torno de 7 a 8 dias). O <strong>Cipionato</strong> (famoso Deposteron) age no corpo de forma praticamente idêntica ao Enantato, porém muitos usuários relatam uma leve retenção hídrica a mais com ele. Ideal para quem busca ganho de força e volume bruto.</p>'
+                    },
+                    {
+                        id: 3,
+                        category: 'Bulking',
+                        title: 'Como estruturar um ciclo de ganhos brutos',
+                        excerpt: 'Aprenda a sinergia entre Deca, Dianabol e Testosterona para fases de bulking onde o objetivo é adicionar tamanho extremo.',
+                        content: '<p>A fase de <strong>Bulking</strong> ou ganho de volume exige um ambiente altamente anabólico, treinos intensos com cargas altas e, principalmente, um superávit calórico (comer mais do que gasta). Quando se trata do uso de recursos ergogênicos, a sinergia das drogas é o segredo do sucesso.</p><br><h3>A Base Clássica</h3><p>Todo ciclo precisa de uma base de testosterona para garantir o bem-estar, a libido e o anabolismo básico. No bulking, escolhe-se normalmente o <strong>Cipionato</strong> ou <strong>Enantato</strong>, ou até mesmo o blend <strong>Durateston</strong>. Em seguida, adiciona-se uma droga anabólica "construtora".</p><br><h3>O Poder da Deca Durabolin</h3><p>A <strong>Nandrolona (Deca)</strong> é a rainha do bulking. Ela promove uma síntese proteica altíssima e ajuda a lubrificar as articulações, o que é excelente já que você estará pegando muito mais peso. A Deca puxa retenção de nitrogênio para dentro do músculo, deixando-o com aspecto denso e cheio.</p><br><h3>O "Kick-Start" com Dianabol</h3><p>Os ésteres longos (Deca e Enantato) demoram de 3 a 4 semanas para bater no corpo. Para não perder tempo, muitos atletas utilizam a <strong>Dianabol</strong> ou <strong>Hemogenin</strong> (orais de meia-vida curta) nas primeiras 4 semanas do ciclo. Eles proporcionam ganho de força e volume imediato, até que as drogas injetáveis atinjam o pico plasmático. Importante sempre cuidar do fígado ao usar orais!</p>'
+                    }
+                ],
+                selectedProduct: null,
+                step: 1,
+                shippingMethods: [
+                    { id: 'titan', name: 'Titan Logística', price: 0, desc: 'Calculado p/ sua região', icon: 'truck' }
+                ],
+                selectedShipping: { id: 'titan', name: 'Titan Logística', price: 0, desc: 'Calculado p/ sua região', icon: 'truck' },
+                
+                shippingTable: {
+                    'SP': 40, 'MG': 40, 'ES': 40,
+                    'RJ': 30,
+                    'PR': 50, 'SC': 50, 'RS': 50,
+                    'GO': 60, 'MT': 60, 'MS': 60, 'DF': 60,
+                    'AL': 50, 'BA': 50, 'CE': 50, 'MA': 50, 'PB': 50, 'PE': 50, 'PI': 50, 'RN': 50, 'SE': 50,
+                    'AC': 60, 'AP': 60, 'AM': 60, 'PA': 60, 'RO': 60, 'RR': 60, 'TO': 60
+                },
+
+                calculateShipping() {
+                    const state = this.form.state?.toUpperCase();
+                    const city = this.form.city?.toUpperCase() || '';
+                    const subtotal = this.cart.reduce((sum, item) => sum + item.price, 0);
+                    
+                    let basePrice = 0;
+                    
+                    if (this.shippingTable[state]) {
+                        basePrice = this.shippingTable[state];
+                        
+                        // Exceção RJ: Região dos Lagos e Região Serrana (R$ 40)
+                        if (state === 'RJ') {
+                            const excecoesRJ = [
+                                'CABO FRIO', 'BÚZIOS', 'ARMAÇÃO DOS BÚZIOS', 'ARRAIAL DO CABO', 'RIO DAS OSTRAS', 'SÃO PEDRO DA ALDEIA', 'IGUABA GRANDE', 'ARARUAMA',
+                                'PETRÓPOLIS', 'TERESÓPOLIS', 'NOVA FRIBURGO', 'CORDEIRO', 'CANTAGALO', 'BOM JARDIM', 'CACHOEIRAS DE MACACU', 'GUAPIMIRIM', 'MACAÉ', 'CASIMIRO DE ABREU'
+                            ];
+                            if (excecoesRJ.some(c => city.includes(c))) {
+                                basePrice = 40;
+                            }
+                        }
+                    }
+
+                    if (subtotal >= 2000) {
+                        this.selectedShipping.price = 0;
+                        this.selectedShipping.desc = 'Frete Grátis (Acima de R$2.000)';
+                    } else if (basePrice > 0) {
+                        this.selectedShipping.price = basePrice;
+                        this.selectedShipping.desc = 'Calculado p/ sua região';
+                    } else {
+                        this.selectedShipping.price = 0;
+                        this.selectedShipping.desc = 'Calculado p/ sua região';
+                    }
+                },
+
+                // Supabase Config
+                supabase: null,
+                initSupabase() {
+                    this.supabase = supabase.createClient('https://sclbrgfgxooqgqijuplq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjbGJyZ2ZneG9vcWdxaWp1cGxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxNDQ3MDUsImV4cCI6MjA5OTcyMDcwNX0.wq9KczbVz7Jp2TcD6CeKceSUmy5Rr7wuADk5MqIJvbs');
+                },
+
+                // WhatsApp Load Balancing (Rodízio)
+                whatsappNumbers: [
+                    '554792747083',
+                    '5521965555061',
+                    '5521968414259',
+                    '595992916644',
+                    '5521995523759'
+                ],
+                getRandomWhatsApp() {
+                    const randomIndex = Math.floor(Math.random() * this.whatsappNumbers.length);
+                    return this.whatsappNumbers[randomIndex];
+                },
+
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
+                    localStorage.setItem('titan-theme', this.darkMode ? 'dark' : 'light');
+                },
+                form: { 
+                    name: '', 
+                    id: '', 
+                    phone: '',
+                    zip: '', 
+                    city: '',
+                    state: '', 
+                    street: '', 
+                    number: '', 
+                    neighborhood: '',
+                    reference: '' 
+                },
+                utm: { source: '', medium: '' },
+                draftOrderId: null,
+                draftSaveTimeout: null,
+
+                // Titan Intelligence Tracking
+                trackEvent(type, data) {
+                    const events = JSON.parse(localStorage.getItem('titan_events') || '[]');
+                    events.push({
+                        id: 'ID-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                        timestamp: new Date().toISOString(),
+                        type: type,
+                        status: type === 'ORDER_COMPLETE' ? 'PENDING' : 'ACTIVE',
+                        data: data,
+                        cart: [...this.cart], // Capture current cart state
+                        customer: { ...this.form }
+                    });
+                    localStorage.setItem('titan_events', JSON.stringify(events));
+                },
+                
+                init() {
+                    this.BRANDS = window.BRANDS || [];
+                    this.products = window.PRODUCTS || [];
+                    
+                    const savedTheme = localStorage.getItem('titan-theme');
+                    if(savedTheme === 'dark') {
+                        this.darkMode = true;
+                    } else {
+                        this.darkMode = false;
+                    }
+                    document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
+
+                    // Check URL parameters for UTM tracking (Influencer Links)
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const utmSource = urlParams.get('utm_source') || urlParams.get('utm') || urlParams.get('cupom');
+                    const utmMedium = urlParams.get('utm_medium');
+                    
+                    if (utmSource || utmMedium) {
+                        this.utm.source = (utmSource || '').toUpperCase();
+                        this.utm.medium = utmMedium || '';
+                        localStorage.setItem('titan_utms', JSON.stringify(this.utm));
+                        
+                        // Try to apply coupon automatically if it's a cupom param
+                        if (urlParams.get('cupom')) {
+                            this.couponCode = this.utm.source;
+                            setTimeout(() => this.applyCoupon(), 1000);
+                        }
+                    } else {
+                        const savedUtms = localStorage.getItem('titan_utms');
+                        if (savedUtms) {
+                            try { this.utm = JSON.parse(savedUtms); } catch(e) {}
+                        }
+                    }
+
+                    // Register Influencer Click to Supabase (after initSupabase)
+                    const registerClick = async () => {
+                        if (this.utm.source) {
+                            try {
+                                await this.supabase.from('influencer_clicks').insert([{ utm_source: this.utm.source }]);
+                            } catch(e) {
+                                console.log('Click track failed, table might not exist yet.');
+                            }
+                        }
+                    };
+
+                    // Watch form for auto-capture
+                    this.$watch('form', (val) => {
+                        if (val.name || val.phone) {
+                            this.trackEvent('FORM_CAPTURE', val);
+                        }
+                        
+                        // Abandoned Cart Draft Save
+                        if (val.phone && val.phone.replace(/\D/g, '').length >= 10 && this.cart.length > 0) {
+                            clearTimeout(this.draftSaveTimeout);
+                            this.draftSaveTimeout = setTimeout(async () => {
+                                const payload = {
+                                    customer_name: val.name || 'Desconhecido',
+                                    customer_phone: val.phone,
+                                    customer_id: val.id || '',
+                                    address: val,
+                                    items: this.cart,
+                                    total: this.total,
+                                    coupon: this.couponApplied ? this.couponCode.toUpperCase().trim() : null,
+                                    shipping_method: this.selectedShipping,
+                                    utm_source: this.utm.source,
+                                    utm_medium: this.utm.medium,
+                                    status: 'draft'
+                                };
+                                
+                                try {
+                                    if (this.draftOrderId) {
+                                        await this.supabase.from('orders').update(payload).eq('id', this.draftOrderId);
+                                    } else {
+                                        const { data, error } = await this.supabase.from('orders').insert([payload]).select('id').single();
+                                        if (data && !error) this.draftOrderId = data.id;
+                                    }
+                                } catch(e) { console.error('Draft save error:', e); }
+                            }, 2000); // 2 second debounce
+                        }
+                    }, { deep: true });
+
+                    // Watch ZIP for auto-lookup
+                    this.$watch('form.zip', (val) => {
+                        if (!val) return;
+                        const cleanZip = val.replace(/\D/g, '');
+                        if (cleanZip.length === 8) {
+                            fetch(`https://viacep.com.br/ws/${cleanZip}/json/`)
+                                .then(r => r.json())
+                                .then(d => {
+                                    if (!d.erro) {
+                                        this.form.city = d.localidade || '';
+                                        this.form.state = d.uf || '';
+                                        this.form.neighborhood = d.bairro || '';
+                                        this.form.street = d.logradouro || '';
+                                        this.calculateShipping();
+                                    }
+                                }).catch(e => console.error('ViaCEP Error:', e));
+                        }
+                    });
+
+                    this.$watch('form.state', () => this.calculateShipping());
+                    this.$watch('form.city', () => this.calculateShipping());
+                    
+                    this.startBannerRotation();
+                    this.startSocialProof();
+                    this.initSupabase();
+                    registerClick();
+                    
+                    // Generate Schema Markup (JSON-LD) for SEO
+                    const schemaScript = document.createElement('script');
+                    schemaScript.type = 'application/ld+json';
+                    const schemaData = {
+                        "@context": "https://schema.org",
+                        "@type": "ItemList",
+                        "itemListElement": this.products.map((p, index) => ({
+                            "@type": "ListItem",
+                            "position": index + 1,
+                            "item": {
+                                "@type": "Product",
+                                "name": p.name + " - " + p.brand,
+                                "image": "https://www.grupotitan.sbs/" + encodeURIComponent(p.img),
+                                "description": p.desc || p.name + " " + p.brand,
+                                "brand": {
+                                    "@type": "Brand",
+                                    "name": p.brand
+                                },
+                                "offers": {
+                                    "@type": "Offer",
+                                    "url": "https://www.grupotitan.sbs",
+                                    "priceCurrency": "BRL",
+                                    "price": p.price,
+                                    "availability": "https://schema.org/InStock"
+                                }
+                            }
+                        }))
+                    };
+                    schemaScript.text = JSON.stringify(schemaData);
+                    document.head.appendChild(schemaScript);
+                    
+                    lucide.createIcons();
+                },
+
+                get filteredProducts() {
+                    let items = [...this.products];
+                    
+                    if (this.filter !== 'ALL') items = items.filter(i => i.brand === this.filter);
+                    if (this.search) items = items.filter(i => i.name.toLowerCase().includes(this.search.toLowerCase()) || i.brand.toLowerCase().includes(this.search.toLowerCase()));
+                    
+                    if (this.sortBy === 'price-asc') items.sort((a, b) => a.price - b.price);
+                    if (this.sortBy === 'price-desc') items.sort((a, b) => b.price - a.price);
+                    if (this.sortBy === 'name-asc') items.sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    this.$nextTick(() => lucide.createIcons());
+                    return items;
+                },
+
+                get currentBrandData() {
+                    if (this.filter === 'ALL') return null;
+                    return this.BRANDS.find(b => b.brand === this.filter);
+                },
+
+                couponCode: '',
+                couponApplied: false,
+                discountAmount: 0,
+                couponBrands: [], // Allow list of brands
+                couponLoading: false,
+                
+                async applyCoupon() {
+                    const code = this.couponCode.toUpperCase().trim();
+                    if(!code) return;
+                    
+                    this.couponLoading = true;
+                    try {
+                        const { data, error } = await this.supabase
+                            .from('coupons')
+                            .select('discount_percent, brands')
+                            .eq('code', code)
+                            .single();
+                            
+                        if(error || !data) {
+                            alert('❌ Cupom inválido ou expirado. Cupons são exclusivos para Atletas e Influenciadores parceiros.');
+                            this.couponApplied = false;
+                            this.discountAmount = 0;
+                            this.couponBrands = [];
+                        } else {
+                            const discount = parseFloat(data.discount_percent);
+                            
+                            // Regra: Cupons de 20% só valem para a PRIMEIRA COMPRA
+                            if (discount === 20) {
+                                const phoneNum = this.form.phone.replace(/\D/g, '');
+                                if (!phoneNum) {
+                                    alert('⚠️ Para usar o cupom de 20%, você precisa preencher o campo "WhatsApp" no formulário primeiro.');
+                                    this.couponLoading = false;
+                                    return;
+                                }
+                                
+                                // Checar se o cliente já comprou
+                                const { data: prevOrders } = await this.supabase
+                                    .from('orders')
+                                    .select('id')
+                                    .eq('customer_phone', this.form.phone)
+                                    .neq('status', 'draft')
+                                    .limit(1);
+                                    
+                                if (prevOrders && prevOrders.length > 0) {
+                                    alert('❌ O cupom de 20% é válido apenas para a PRIMEIRA compra no site.');
+                                    this.couponLoading = false;
+                                    return;
+                                }
+                            }
+
+                            this.couponApplied = true;
+                            this.discountAmount = discount;
+                            this.couponBrands = data.brands || [];
+                            alert(`✅ Cupom aplicado com sucesso! Desconto de ${this.discountAmount}%`);
+                        }
+                    } catch(e) {
+                        console.error(e);
+                        alert("Erro ao validar cupom. Tente novamente.");
+                    } finally {
+                        this.couponLoading = false;
+                    }
+                },
+
+                get subtotal() {
+                    return this.cart.reduce((sum, item) => sum + item.price, 0);
+                },
+
+                get totalDiscountValue() {
+                    if (!this.couponApplied) return 0;
+                    
+                    let discount = 0;
+                    this.cart.forEach(item => {
+                        const brandUpper = (item.brand || '').toUpperCase();
+                        
+                        // Rule: Only apply discount if the brand is exactly listed in the coupon's brands array
+                        if (this.couponBrands && this.couponBrands.length > 0) {
+                            const isAllowed = this.couponBrands.some(b => b.toUpperCase() === brandUpper);
+                            if (isAllowed) {
+                                discount += item.price * (this.discountAmount / 100);
+                            }
+                        }
+                    });
+                    
+                    return discount;
+                },
+
+                get total() { 
+                    let sub = this.subtotal;
+                    sub -= this.totalDiscountValue;
+                    return sub > 0 ? sub + this.selectedShipping.price : 0;
+                },
+                cart: [],
+                addToCart(product) { 
+                    this.cart.push(product); 
+                    this.trackEvent('CART_ADD', product);
+                    
+                    // Trigger a pulse animation on the cart icon
+                    const cartBtn = document.getElementById('cart-btn');
+                    if(cartBtn) {
+                        cartBtn.classList.add('scale-125', 'text-red-600');
+                        setTimeout(() => cartBtn.classList.remove('scale-125', 'text-red-600'), 500);
+                    }
+                    this.calculateShipping();
+                },
+                removeFromCart(index) { 
+                    const item = this.cart[index];
+                    this.cart.splice(index, 1); 
+                    this.calculateShipping();
+                    this.trackEvent('CART_REMOVE', item);
+                },
+                nextStep() { 
+                    if (this.step === 1) {
+                        if (this.cart.length === 0) return;
+                        this.step = 2; 
+                        this.trackEvent('CHECKOUT_STEP_2', this.cart);
+                    } else {
+                        // VALIDATION
+                        if (!this.form.name || !this.form.phone || !this.form.zip || !this.form.street) {
+                            alert('⚠️ POR FAVOR, PREENCHA TODOS OS CAMPOS OBRIGATÓRIOS PARA O ENVIO.');
+                            return;
+                        }
+                        this.checkout(); 
+                    }
+                },
+
+                async handleAuth() {
+                    const email = event.target.querySelector('input[type="email"]').value;
+                    const password = event.target.querySelector('input[type="password"]').value;
+
+                    try {
+                        let result;
+                        if (this.authMode === 'login') {
+                            result = await this.supabase.auth.signInWithPassword({ email, password });
+                        } else {
+                            result = await this.supabase.auth.signUp({ email, password });
+                        }
+
+                        if (result.error) throw result.error;
+                        
+                        alert(this.authMode === 'login' ? 'Acesso Autorizado!' : 'Conta criada com sucesso!');
+                        this.showAuth = false;
+                    } catch (error) {
+                        alert('Erro: ' + error.message);
+                    }
+                },
+
+                async checkout() {
+                    this.trackEvent('ORDER_COMPLETE', { items: this.cart, total: this.total });
+                    
+                    // 1. SAVE TO SUPABASE (Background task to avoid losing user gesture context)
+                    try {
+                        const payload = {
+                            customer_name: this.form.name,
+                            customer_phone: this.form.phone,
+                            customer_id: this.form.id,
+                            address: this.form,
+                            items: this.cart,
+                            total: this.total,
+                            coupon: this.couponApplied ? this.couponCode.toUpperCase().trim() : null,
+                            shipping_method: this.selectedShipping,
+                            utm_source: this.utm.source,
+                            utm_medium: this.utm.medium,
+                            status: 'pending'
+                        };
+                        
+                        if (this.draftOrderId) {
+                            this.supabase.from('orders').update(payload).eq('id', this.draftOrderId).then(({ error }) => {
+                                if (error) console.error('Database update error:', error);
+                            });
+                        } else {
+                            this.supabase.from('orders').insert([payload]).then(({ error }) => {
+                                if (error) console.error('Database save error:', error);
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Supabase error:', e);
+                    }
+
+                    // 2. SEND PUSHCUT NOTIFICATION
+                    try {
+                        const pushcutUrl = 'https://api.pushcut.io/vwZMzBXLGOnHP-jPyY3Bi/notifications/Titan';
+                        fetch(pushcutUrl, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                title: '🚀 Nova Venda - Grupo Titan',
+                                text: `Cliente: ${this.form.name.split(' ')[0]} | Valor: R$ ${this.total.toFixed(2)}`
+                            })
+                        }).catch(e => console.error('Pushcut Error:', e));
+                    } catch(e) {}
+
+                    // 3. SEND TO WHATSAPP
+                    const itemsList = this.cart.map(i => `• *${i.name}* (${i.brand}${i.dos ? ' - ' + i.dos : ''}) - R$ ${i.price},00`).join('\n');
+                    
+                    let couponText = '';
+                    if (this.couponApplied && this.couponCode) {
+                        couponText = `🎟️ *CUPOM APLICADO:* ${this.couponCode.toUpperCase()} (${this.discountAmount}% OFF)\n\n`;
+                    }
+
+                    const msg = `🚀 *NOVO PEDIDO - GRUPO TITAN*\n\n` +
+                                `👤 *DADOS DO CLIENTE*\n` +
+                                `*Nome:* ${this.form.name}\n` +
+                                `*WhatsApp:* ${this.form.phone}\n\n` +
+                                `📍 *ENDEREÇO DE ENTREGA*\n` +
+                                `*CEP:* ${this.form.zip}\n` +
+                                `*Rua:* ${this.form.street}, ${this.form.number}\n` +
+                                `*Bairro:* ${this.form.neighborhood}\n` +
+                                `*Cidade:* ${this.form.city} - ${this.form.state}\n` +
+                                `*Referência:* ${this.form.reference}\n\n` +
+                                `📦 *RESUMO DO PEDIDO*\n${itemsList}\n\n` +
+                                couponText +
+                                `🚚 *ENVIO:* ${this.selectedShipping.name} (R$ ${this.selectedShipping.price},00)\n\n` +
+                                `💰 *VALOR TOTAL: R$ ${this.total.toFixed(2).replace('.', ',')}*`;
+                    
+                    const selectedNumber = this.getRandomWhatsApp();
+                    const whatsappUrl = `https://wa.me/${selectedNumber}?text=${encodeURIComponent(msg)}`;
+                    
+                    // Use window.location.href to avoid pop-up blockers and ensure redirection works on all devices
+                    window.location.href = whatsappUrl;
+                },
+
+                // Social Proof Notifications
+                showSocialProof: false,
+                currentProof: { name: '', product: '', brand: '', time: '' },
+                proofNames: ['Rafael', 'Jessica', 'Bruno', 'Amanda', 'Carlos', 'Mariana', 'Felipe', 'Larissa', 'Gustavo', 'Beatriz', 'Lucas', 'Camila'],
+                
+                startSocialProof() {
+                    const run = () => {
+                        const isOnlineMsg = Math.random() > 0.7;
+                        
+                        if (isOnlineMsg) {
+                            this.currentProof = {
+                                type: 'ONLINE',
+                                count: Math.floor(Math.random() * 12) + 12,
+                                time: 'Agora'
+                            };
+                        } else {
+                            const randomBrand = this.BRANDS[Math.floor(Math.random() * this.BRANDS.length)];
+                            const brandProducts = this.products.filter(p => p.brand === randomBrand.brand);
+                            if (brandProducts.length === 0) return setTimeout(run, 5000);
+                            
+                            const randomProduct = brandProducts[Math.floor(Math.random() * brandProducts.length)];
+                            
+                            this.currentProof = {
+                                type: 'PURCHASE',
+                                name: this.proofNames[Math.floor(Math.random() * this.proofNames.length)],
+                                product: randomProduct.name,
+                                brand: randomProduct.brand,
+                                qty: Math.random() > 0.8 ? 2 : 1,
+                                time: Math.floor(Math.random() * 60) + 30 + ' seg'
+                            };
+                        }
+                        
+                        this.showSocialProof = true;
+                        this.$nextTick(() => lucide.createIcons());
+                        
+                        // Show for 6 seconds
+                        setTimeout(() => this.showSocialProof = false, 6000);
+                        
+                        // Interval of ~3 minutes (180,000ms) with some variance
+                        const nextDelay = 180000 + (Math.random() * 40000 - 20000);
+                        setTimeout(run, nextDelay);
+                    };
+                    
+                    setTimeout(run, 15000); // First one after 15s
+                }
+            }
+        }
+    </script>
+    <!-- Product Detail Modal (Mobile-Optimized Fullscreen) -->
+     <div x-show="showProductModal" 
+          x-cloak
+          x-transition:enter="transition ease-out duration-300"
+          x-transition:enter-start="opacity-0 translate-y-4"
+          x-transition:enter-end="opacity-100 translate-y-0"
+          x-transition:leave="transition ease-in duration-200"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          class="fixed inset-0 z-[6000] bg-[#050505] overflow-y-auto w-full h-full flex flex-col sm:p-10 sm:items-center sm:justify-center">
+        
+        <div class="bg-[#0a0a0c] w-full min-h-full sm:min-h-0 sm:max-w-4xl sm:rounded-2xl flex flex-col md:flex-row relative shadow-2xl border-0 sm:border border-white/10">
+            
+            <!-- Mobile Back Button (top bar) -->
+            <div class="sm:hidden sticky top-0 z-[7000] bg-[#0a0a0c]/95 backdrop-blur-md flex items-center justify-between px-4 py-4 border-b border-white/10">
+                <button @click="showProductModal = false" class="flex items-center gap-2 text-white tap-bounce">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    <span class="text-base font-bold">Voltar aos produtos</span>
+                </button>
+            </div>
+
+            </div>
+
+        <!-- Blog Modal -->
+        <div x-cloak x-show="showBlogModal" class="fixed inset-0 z-[8000] flex items-center justify-center p-4 sm:p-6"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="showBlogModal = false"></div>
+            
+            <div class="relative w-full max-w-2xl bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-2xl flex flex-col max-h-[90dvh] overflow-hidden" @click.stop>
+                <button @click="showBlogModal = false" class="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors z-10">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                
+                <div class="overflow-y-auto p-6 md:p-10 hide-scrollbar">
+                    <div class="text-[10px] font-black text-red-500 uppercase tracking-widest mb-4" x-text="selectedPost?.category"></div>
+                    <h2 class="text-2xl md:text-4xl font-black text-white mb-8 leading-tight" x-text="selectedPost?.title"></h2>
+                    
+                    <div class="prose prose-invert prose-red max-w-none text-slate-300 text-sm md:text-base leading-relaxed" x-html="selectedPost?.content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp Floating Button -->
+            <button @click="showProductModal = false" class="hidden sm:flex absolute top-3 right-3 w-10 h-10 rounded-full bg-white/10 items-center justify-center hover:bg-red-600 text-white transition-all z-[7000]">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Product Image -->
+            <div class="w-full md:w-1/2 aspect-square relative bg-[#111] overflow-hidden shrink-0">
+                <img :src="selectedProduct?.img" :alt="selectedProduct?.name" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            </div>
+
+            <!-- Buy Box -->
+            <div class="w-full md:w-1/2 p-5 sm:p-8 flex flex-col text-white flex-1">
+                <!-- Brand -->
+                <span class="text-red-500 text-[12px] font-black tracking-widest uppercase mb-2" x-text="selectedProduct?.brand"></span>
+                
+                <h2 class="text-2xl sm:text-3xl font-black mb-4 uppercase text-white leading-tight" x-text="selectedProduct?.name"></h2>
+                
+                <!-- Price -->
+                <div class="mb-4">
+                    <div class="flex items-baseline gap-3">
+                        <span class="text-4xl font-black text-white">R$<span x-text="selectedProduct?.price"></span>,00</span>
+                        <span class="text-sm font-bold text-slate-500">(Cada)</span>
+                    </div>
+                    <p class="text-sm font-bold mt-2 text-red-500 uppercase tracking-wide">NO BOLETO OU PIX</p>
+                </div>
+                
+                <!-- Installments -->
+                <div class="text-[12px] mb-6 text-slate-400 bg-white/5 rounded-xl p-4 border border-white/10">
+                    <p>ou a partir de <strong class="text-white">R$<span x-text="(selectedProduct?.price * 1.1).toFixed(2).replace('.', ',')"></span></strong> no cartão em até <strong>6x</strong> de <strong>R$<span x-text="(selectedProduct?.price * 1.1 / 6).toFixed(2).replace('.', ',')"></span></strong> sem juros.</p>
+                </div>
+
+                <!-- Dose Badge -->
+                <div class="mb-6">
+                    <div class="flex gap-2">
+                        <span class="border border-white/20 text-white px-4 py-2 text-sm rounded-lg font-bold" x-text="selectedProduct?.dos"></span>
+                    </div>
+                </div>
+
+                <!-- Stock Info -->
+                <div class="flex items-center gap-2 mb-8 text-sm font-bold uppercase text-emerald-400">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span>EM ESTOQUE — Envio imediato!</span>
+                </div>
+
+                <!-- Buy Button -->
+                <div class="mt-auto sm:mt-0 pb-4">
+                    <button @click="addToCart(selectedProduct); showProductModal = false; openCart = true; window.scrollTo(0,0)" class="w-full bg-[#388e3c] hover:bg-[#2e7d32] active:scale-[0.98] text-white font-black text-lg py-4 sm:py-5 rounded-xl transition-all uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg shadow-[#388e3c]/30 tap-bounce">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span>ADICIONAR AO CARRINHO</span>
+                    </button>
+                </div>
+
+                <!-- Product Description (SEO) -->
+                <div x-show="selectedProduct?.desc" class="mt-2 pb-6 sm:pb-0 text-sm text-slate-300 leading-relaxed bg-black/20 p-4 rounded-xl border border-white/10">
+                    <p x-text="selectedProduct?.desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Notifications (Social Proof) -->
+    <div x-cloak x-show="showSocialProof" 
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 -translate-y-10 scale-90"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-500"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 -translate-y-10 scale-90"
+         class="fixed top-28 left-4 right-4 sm:left-10 sm:right-auto z-[8000] w-auto sm:w-[350px]">
+        
+        <div class="app-glass rounded-[2rem] p-5 border border-white/10 shadow-2xl flex items-center gap-4 relative overflow-hidden group">
+            <!-- Animated Background Glow -->
+            <div class="absolute inset-0 bg-gradient-to-r from-red-600/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="relative w-12 h-12 bg-red-600/10 rounded-2xl flex items-center justify-center shrink-0 border border-red-600/20">
+                <i :data-lucide="currentProof.type === 'ONLINE' ? 'users' : 'shopping-bag'" class="w-6 h-6 text-red-600"></i>
+            </div>
+            
+            <div class="relative flex-1">
+                <div class="flex items-center justify-between mb-1">
+                    <p class="text-[10px] font-black text-red-600 uppercase tracking-widest" x-text="currentProof.type === 'ONLINE' ? 'Tempo Real' : 'Nova Venda'"></p>
+                    <p class="text-[8px] font-bold text-slate-400 uppercase" x-text="currentProof.time"></p>
+                </div>
+                <p class="text-[11px] font-black text-slate-900 dark:text-white leading-tight">
+                    <template x-if="currentProof.type === 'ONLINE'">
+                        <span>Há <span class="text-red-600" x-text="currentProof.count"></span> pessoas navegando no laboratório agora.</span>
+                    </template>
+                    <template x-if="currentProof.type === 'PURCHASE'">
+                        <span>
+                            <span x-text="currentProof.name" class="text-red-600"></span> 
+                            comprou <span class="text-red-600" x-text="currentProof.qty"></span>x 
+                            <span x-text="currentProof.product" class="italic"></span> 
+                            da <span x-text="currentProof.brand" class="font-black uppercase tracking-tighter"></span>
+                        </span>
+                    </template>
+                </p>
+            </div>
+            
+            <!-- Close Button -->
+            <button @click="showSocialProof = false" class="absolute top-2 right-2 text-slate-300 hover:text-red-600 transition-colors">
+                <i data-lucide="x" class="w-3 h-3"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Maria - Suporte Humanizado -->
+    <div x-data="mariaSupport()" x-show="!openCart" class="fixed z-[9000]" x-cloak
+         style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));">
+
+        <!-- Chat Panel -->
+        <div x-show="open"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="absolute bottom-20 right-0 w-[calc(100vw-2rem)] max-w-[380px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-100 dark:border-white/10 overflow-hidden flex flex-col"
+             style="max-height: 75vh;">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-br from-[#128C7E] to-[#25D366] p-5 flex items-center gap-3">
+                <div class="relative">
+                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#128C7E] font-black text-lg shadow-lg">M</div>
+                    <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></div>
+                </div>
+                <div class="flex-1">
+                    <p class="text-white font-black text-sm">Maria</p>
+                    <p class="text-white/80 text-[10px] font-bold uppercase tracking-widest">Atendimento Online</p>
+                </div>
+                <button @click="open = false" class="text-white/80 hover:text-white transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div class="flex-1 overflow-y-auto p-5 space-y-3 bg-slate-50 dark:bg-slate-950" style="min-height: 280px;">
+                <template x-for="(msg, idx) in messages" :key="idx">
+                    <div class="flex" :class="msg.from === 'maria' ? 'justify-start' : 'justify-end'">
+                        <div class="max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm"
+                             :class="msg.from === 'maria' ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-bl-sm' : 'bg-[#25D366] text-white rounded-br-sm font-semibold'">
+                            <p x-html="msg.text"></p>
+                        </div>
+                    </div>
+                </template>
+                <div x-show="typing" class="flex justify-start">
+                    <div class="bg-white dark:bg-slate-800 px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm flex gap-1">
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Replies -->
+            <div class="px-4 py-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-white/10">
+                <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Perguntas Frequentes</p>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="q in faqs" :key="q.id">
+                        <button @click="askQuestion(q)"
+                                class="px-3 py-2 bg-slate-100 dark:bg-white/5 hover:bg-[#25D366]/10 hover:text-[#128C7E] text-slate-700 dark:text-slate-200 rounded-full text-xs font-bold transition-all">
+                            <span x-text="q.label"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <!-- WhatsApp CTA -->
+            <a :href="'https://wa.me/' + getRandomWhatsApp() + '?text=' + encodeURIComponent('Olá Maria, quero falar com o atendimento do Grupo Titan')"
+               target="_blank"
+               class="block bg-[#25D366] hover:bg-[#1ebe5a] text-white text-center py-4 font-black text-sm uppercase tracking-wider transition-colors">
+                <span class="inline-flex items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    Falar no WhatsApp
+                </span>
+            </a>
+        </div>
+
+        <!-- Floating Toggle Button -->
+        <button @click="open = !open" class="relative group">
+            <div class="absolute inset-0 bg-[#25D366] rounded-full blur-xl opacity-50 animate-pulse"></div>
+            <div class="relative w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 hover:scale-110 active:scale-95 transition-all duration-300">
+                <svg x-show="!open" width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                <svg x-show="open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <span x-show="!open && unread" class="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white text-xs font-black rounded-full flex items-center justify-center border-2 border-white">1</span>
+        </button>
+    </div>
+
+    <script>
+        function mariaSupport() {
+            return {
+                open: false,
+                typing: false,
+                unread: true,
+                messages: [
+                    { from: 'maria', text: 'Oi, tudo bem? 👋 Eu sou a <b>Maria</b>, do atendimento do Grupo Titan.' },
+                    { from: 'maria', text: 'Posso te ajudar com dúvidas sobre <b>envios</b>, <b>produtos</b> e <b>pedidos</b>. É só escolher uma opção abaixo 👇' }
+                ],
+                faqs: [
+                    { id: 'envio_br', label: 'Envio para o Brasil' },
+                    { id: 'envio_rj', label: 'Entrega no Rio de Janeiro' },
+                    { id: 'caixa', label: 'Caixa dos produtos' },
+                    { id: 'prazo', label: 'Prazo de entrega' },
+                    { id: 'pagamento', label: 'Formas de pagamento' },
+                    { id: 'atendente', label: 'Falar com atendente' }
+                ],
+                askQuestion(q) {
+                    this.messages.push({ from: 'user', text: q.label });
+                    this.typing = true;
+                    setTimeout(() => {
+                        this.typing = false;
+                        this.messages.push({ from: 'maria', text: this.getAnswer(q.id) });
+                        this.scrollBottom();
+                    }, 1200);
+                    this.scrollBottom();
+                },
+                getAnswer(id) {
+                    const answers = {
+                        envio_br: 'Enviamos para <b>todo o Brasil</b> em até <b>7 dias úteis</b> após a confirmação do pagamento. 📦✈️<br><br>Você recebe o código de rastreio assim que o pedido sai!',
+                        envio_rj: 'No <b>Rio de Janeiro</b> temos entrega expressa via <b>motoboy</b>! 🏍️💨<br><br>Pedidos feitos na <b>segunda ou terça</b> são entregues no mesmo dia. Rapidinho na sua porta!',
+                        caixa: 'As caixas oficiais dos produtos ainda estão sendo atualizadas no site. 📦<br><br>Assim que você fizer o pedido, eu te mando <b>todas as fotos das caixas oficiais</b> direto no WhatsApp, combinado? ✨',
+                        prazo: 'Os prazos são:<br><br>📍 <b>Rio de Janeiro:</b> Motoboy expresso (mesmo dia para pedidos seg/ter)<br>📍 <b>Brasil:</b> Até 7 dias úteis<br><br>Tudo com rastreio!',
+                        pagamento: 'Aceitamos <b>PIX</b> (com desconto), <b>cartão</b> e <b>boleto</b>. 💳<br><br>O pagamento é finalizado direto comigo no WhatsApp, com total segurança!',
+                        atendente: 'Claro! Clica no botão verde aqui embaixo 👇 que eu te respondo na hora no WhatsApp! 💚'
+                    };
+                    return answers[id] || 'Para essa dúvida, me chama no WhatsApp que te respondo agora! 💬';
+                },
+                scrollBottom() {
+                    this.$nextTick(() => {
+                        const container = this.$el.querySelector('.overflow-y-auto');
+                        if (container) container.scrollTop = container.scrollHeight;
+                    });
+                },
+                init() {
+                    this.$watch('open', value => { if (value) this.unread = false; });
+                }
+            };
+        }
+
+
+    </script>
+    
+    <!-- Real-time Analytics Tracker -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supabaseUrl = 'https://sclbrgfgxooqgqijuplq.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjbGJyZ2ZneG9vcWdxaWp1cGxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxNDQ3MDUsImV4cCI6MjA5OTcyMDcwNX0.wq9KczbVz7Jp2TcD6CeKceSUmy5Rr7wuADk5MqIJvbs';
+            const sb = supabase.createClient(supabaseUrl, supabaseKey);
+            
+            // Generate a unique session ID for this visit
+            const sessionId = 'sess_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || 'Direto';
+            
+            const pingServer = async () => {
+                try {
+                    await sb.from('site_visits').upsert({
+                        session_id: sessionId,
+                        path: window.location.pathname,
+                        last_ping_at: new Date().toISOString(),
+                        user_agent: navigator.userAgent,
+                        utm_source: utmSource
+                    });
+                } catch(e) {}
+            };
+
+            // Ping immediately, then every 10 seconds
+            pingServer();
+            setInterval(pingServer, 10000);
+            
+            // Try to ping on exit
+            window.addEventListener('beforeunload', () => {
+                navigator.sendBeacon(`${supabaseUrl}/rest/v1/site_visits`, JSON.stringify({
+                    session_id: sessionId,
+                    path: window.location.pathname,
+                    last_ping_at: new Date().toISOString()
+                }));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1138,11 +1138,10 @@
 
                 // WhatsApp Load Balancing (Rodízio)
                 whatsappNumbers: [
-                    '554792747083',
-                    '5521965555061',
+                    '5511916315521',
                     '5521968414259',
                     '595992916644',
-                    '5521995523759'
+                    '553891407828'
                 ],
                 getRandomWhatsApp() {
                     const randomIndex = Math.floor(Math.random() * this.whatsappNumbers.length);
@@ -1546,7 +1545,7 @@
                         couponText = `🎟️ *CUPOM APLICADO:* ${this.couponCode.toUpperCase()} (${this.discountAmount}% OFF)\n\n`;
                     }
 
-                    const msg = `🚀 *NOVO PEDIDO - GRUPO TITAN*\n\n` +
+                    const msg = `🚀 *NOVO PEDIDO (SITE GRUPO TITAN)*\n\n` +
                                 `👤 *DADOS DO CLIENTE*\n` +
                                 `*Nome:* ${this.form.name}\n` +
                                 `*WhatsApp:* ${this.form.phone}\n\n` +
@@ -1831,7 +1830,7 @@
             </div>
 
             <!-- WhatsApp CTA -->
-            <a :href="'https://wa.me/' + getRandomWhatsApp() + '?text=' + encodeURIComponent('Olá Maria, quero falar com o atendimento do Grupo Titan')"
+            <a :href="'https://wa.me/' + getRandomWhatsApp() + '?text=' + encodeURIComponent('Olá, vim pelo Site Grupo Titan e quero falar com o atendimento.')"
                target="_blank"
                class="block bg-[#25D366] hover:bg-[#1ebe5a] text-white text-center py-4 font-black text-sm uppercase tracking-wider transition-colors">
                 <span class="inline-flex items-center gap-2">
